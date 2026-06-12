@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Numerai CoE Hub</title>
+  <link rel="icon" type="image/png" href="assets/img/coe_logo.png">
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --color-primary: #1867C0;
+      --color-primary-hover: #1454A0;
+      --color-primary-active: #0F4280;
+
+      --color-gray-50: #f9fafb;
+      --color-gray-100: #f3f4f6;
+      --color-gray-200: #e5e7eb;
+      --color-gray-300: #d1d5db;
+      --color-gray-400: #9ca3af;
+      --color-gray-500: #6b7280;
+      --color-gray-600: #4b5563;
+      --color-gray-700: #374151;
+      --color-gray-800: #161617;
+      --color-gray-900: #161617;
+
+      --cat-whatsnew: #1867C0;
+      --cat-whatsnew-bg: rgba(24, 103, 192, 0.08);
+      --cat-events: #48A9A6;
+      --cat-events-bg: rgba(72, 169, 166, 0.08);
+      --cat-tools: #9B59B6;
+      --cat-tools-bg: rgba(155, 89, 182, 0.08);
+      --cat-marketplace: #E67E22;
+      --cat-marketplace-bg: rgba(230, 126, 34, 0.08);
+      --cat-resources: #2ECC71;
+      --cat-resources-bg: rgba(46, 204, 113, 0.08);
+      --cat-treasury: #E74C3C;
+      --cat-treasury-bg: rgba(231, 76, 60, 0.08);
+      --cat-team: #F39C12;
+      --cat-team-bg: rgba(243, 156, 18, 0.08);
+
+      --grid-gap: 20px;
+      --grid-max-width: 1120px;
+      --grid-padding-x: 32px;
+
+      --card-radius: 12px;
+      --card-padding: 24px;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --card-border: rgba(255, 255, 255, 0.07);
+      --card-border-hover: rgba(255, 255, 255, 0.12);
+      --card-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", roboto, sans-serif;
+      background: var(--color-gray-900);
+      color: #DDDDDD;
+      line-height: 1.5;
+    }
+
+    /* ===== Layout Container ===== */
+    .page-container {
+      max-width: var(--grid-max-width);
+      margin: 0 auto;
+      padding: 0 var(--grid-padding-x);
+    }
+
+    /* ===== Hero Header ===== */
+    .hero-header {
+      text-align: center;
+      padding: 48px 48px 32px;
+    }
+
+    .hero-header .hero-logo {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 16px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-header h1 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 600;
+      color: var(--color-gray-50);
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .hero-header .hero-subtitle {
+      font-size: clamp(0.875rem, 1.5vw, 1rem);
+      color: var(--color-gray-400);
+      max-width: 560px;
+      margin: 0 auto;
+      letter-spacing: 0.01em;
+    }
+
+    /* ===== Hero Featured Section ===== */
+    .hero-featured {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 72px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* ===== Aurora Background System ===== */
+    .hero-background {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: var(--color-gray-900);
+    }
+
+    /* Deep base gradient — Numerai blue/teal palette */
+    .hero-background::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 120% 80% at 15% 20%, rgba(24, 103, 192, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 90% at 85% 80%, rgba(72, 169, 166, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(24, 103, 192, 0.02) 0%, transparent 50%);
+    }
+
+    /* Aurora ribbon — soft flowing light forms */
+    .hero-background::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 25% 35%, rgba(24, 103, 192, 0.035) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 35% at 70% 55%, rgba(72, 169, 166, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 50% 30%, rgba(24, 103, 192, 0.025) 0%, transparent 70%);
+      animation: aurora-drift 24s ease-in-out infinite alternate;
+    }
+
+    @keyframes aurora-drift {
+      0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+      50% {
+        opacity: 0.88;
+        transform: translateX(-1.5%) scale(1.015);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(1.5%) scale(0.985);
+      }
+    }
+
+    /* Second aurora layer for extra depth */
+    .aurora-glow {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 35% 25% at 20% 40%, rgba(24, 103, 192, 0.025) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 20% at 75% 45%, rgba(72, 169, 166, 0.04) 0%, transparent 70%);
+      animation: aurora-glow-pulse 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes aurora-glow-pulse {
+      0% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+
+    /* ===== Tab Bar — Refined editorial underline style ===== */
+    .hero-tab-bar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      padding: 0 48px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .hero-tab {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 28px 24px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: 0.012em;
+      color: var(--color-gray-500);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+      min-height: 48px;
+    }
+
+    .hero-tab:hover {
+      color: var(--color-gray-300);
+    }
+
+    .hero-tab:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: -2px;
+      border-radius: 4px;
+    }
+
+    .hero-tab::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 24px;
+      right: 24px;
+      height: 2px;
+      background: transparent;
+      transition: background 0.2s ease;
+    }
+
+    .hero-tab[aria-selected="true"],
+    .hero-tab.active {
+      color: var(--color-gray-50);
+      font-weight: 600;
+    }
+
+    .hero-tab[aria-selected="true"]::after,
+    .hero-tab.active::after {
+      background: var(--color-gray-50);
+    }
+
+    .hero-tab .tab-emoji {
+      font-size: 1rem;
+      line-height: 1;
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+
+    .hero-tab[aria-selected="true"] .tab-emoji,
+    .hero-tab.active .tab-emoji {
+      opacity: 1;
+    }
+
+    .hero-tab .tab-label {
+      white-space: nowrap;
+    }
+
+    /* ===== Tab Panels ===== */
+    .hero-tab-panels {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tab-panel {
+      display: none;
+    }
+
+    .hero-tab-panel.active {
+      display: block;
+    }
+
+    .hero-featured-content {
+      display: grid;
+      grid-template-columns: 1.22fr 1fr;
+      gap: 56px;
+      align-items: center;
+      padding: 76px 48px 40px;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-badge {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-gray-500);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      padding: 5px 14px;
+      width: fit-content;
+      margin-bottom: 20px;
+    }
+
+    .hero-text h2 {
+      font-size: clamp(1.625rem, 3vw + 0.25rem, 2.5rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--color-gray-50);
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-text .featured-name {
+      font-size: clamp(1.375rem, 2.5vw + 0.25rem, 2rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-text .featured-name[data-category="marketplace"] { color: var(--cat-marketplace); }
+    .hero-text .featured-name[data-category="events"] { color: var(--cat-events); }
+    .hero-text .featured-name[data-category="tools"] { color: var(--cat-tools); }
+    .hero-text .featured-name[data-category="resources"] { color: var(--cat-resources); }
+    .hero-text .featured-name[data-category="treasury"] { color: var(--cat-treasury); }
+    .hero-text .featured-name[data-category="whatsnew"] { color: var(--cat-whatsnew); }
+
+    .hero-text .featured-description {
+      font-size: clamp(0.9375rem, 1.5vw, 1rem);
+      line-height: 1.7;
+      color: var(--color-gray-400);
+      margin-bottom: 32px;
+    }
+
+    .hero-text .featured-stats {
+      display: flex;
+      gap: 36px;
+      margin-bottom: 36px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-text .featured-stats--no-border {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-value {
+      font-size: 1.375rem;
+      font-weight: 600;
+      color: var(--color-gray-100);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+    }
+
+    .featured-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-gray-50);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 13px 24px;
+      text-decoration: none;
+      width: fit-content;
+      transition: background 0.15s ease, border-color 0.15s ease;
+      min-height: 44px;
+    }
+
+    .featured-cta:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .featured-cta:active {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(1px);
+    }
+
+    .featured-cta:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    .featured-cta-secondary {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    .featured-cta .arrow {
+      transition: transform 0.15s ease;
+      opacity: 0.6;
+    }
+
+    .featured-cta:hover .arrow {
+      transform: translateX(3px);
+      opacity: 1;
+    }
+
+    /* ===== Hero Visual Panel — Subtler ===== */
+    .hero-visual {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      background: var(--color-gray-800);
+      aspect-ratio: 16 / 9;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+
+    .hero-visual-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 65%, rgba(22, 22, 23, 0.5) 100%);
+      pointer-events: none;
+    }
+
+    .hero-visual-label {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-gray-400);
+      background: rgba(0, 0, 0, 0.4);
+      padding: 5px 10px;
+      border-radius: 4px;
+      backdrop-filter: blur(8px);
+    }
+
+    /* ===== Button List Component (for Tools & Resources tabs) ===== */
+    .button-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .button-list-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-gray-50);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 16px 20px;
+      text-decoration: none;
+      transition: background 0.15s ease, border-color 0.15s ease;
+      min-height: 48px;
+    }
+
+    .button-list-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .button-list-item:active {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(1px);
+    }
+
+    .button-list-item:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    .button-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .button-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .button-name {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-gray-50);
+      letter-spacing: -0.005em;
+    }
+
+    .button-desc {
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: var(--color-gray-400);
+      line-height: 1.4;
+    }
+
+    .button-arrow {
+      font-size: 0.875rem;
+      opacity: 0.6;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .button-list-item:hover .button-arrow {
+      transform: translateX(3px);
+      opacity: 1;
+    }
+
+    /* ===== Tools Card Grid Component (Tools tab only) ===== */
+    .tools-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .tools-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .tools-card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .tools-card:focus-within {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    .tools-card-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      flex-shrink: 0;
+      flex-grow: 0;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .tools-card-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .tools-card-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-height: 0;
+      padding: 16px 18px 18px;
+      gap: 8px;
+    }
+
+    .tools-card-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-gray-50);
+      letter-spacing: -0.005em;
+    }
+
+    .tools-card-desc {
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: var(--color-gray-400);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .tools-card-body .featured-cta {
+      margin-top: 20px;
+    }
+
+    /* ===== Team Card Grid Component (Team tab only) ===== */
+    .team-card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .team-row {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+    }
+
+    .team-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 0;
+    }
+
+    .team-card-photo {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .team-card-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .team-card-name {
+      margin-top: 10px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-gray-50);
+      letter-spacing: -0.005em;
+      text-align: center;
+    }
+
+    /* Removed: .team-card-body, .team-card-desc, .team-card-links */
+    /* Card chrome stripped — photo + name only */
+
+    /* ===== Treasury Placeholder ===== */
+    .treasury-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      background: var(--color-gray-800);
+    }
+
+    .placeholder-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      color: var(--color-gray-500);
+    }
+
+    .placeholder-icon {
+      font-size: 2.5rem;
+      opacity: 0.4;
+    }
+
+    .placeholder-text {
+      font-size: 0.875rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== Footer ===== */
+    .site-footer {
+      text-align: center;
+      padding: 8px 16px 32px;
+      margin-top: 4px;
+    }
+
+    .site-footer p {
+      font-size: 0.75rem;
+      color: var(--color-gray-500);
+      letter-spacing: 0.03em;
+      opacity: 0.7;
+    }
+
+    /* ===== Video Card Component ===== */
+    .video-card {
+      position: relative;
+      display: block;
+      text-decoration: none;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      transition: border-color var(--card-transition), box-shadow var(--card-transition);
+    }
+
+    .video-card:hover {
+      border-color: var(--card-border-hover);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .video-card-thumb {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: var(--color-gray-800);
+    }
+
+    .video-card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .video-card:hover .video-card-thumb img {
+      transform: scale(1.03);
+    }
+
+    .video-card-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+    }
+
+    .video-card:hover .video-card-play {
+      background: rgba(24, 103, 192, 0.8);
+      border-color: rgba(24, 103, 192, 0.9);
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+
+    .video-card-play::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 18px;
+      border-color: transparent transparent transparent #fff;
+      margin-left: 3px;
+    }
+
+    .video-card-info {
+      padding: var(--card-padding);
+    }
+
+    .video-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--cat-whatsnew);
+      background: var(--cat-whatsnew-bg);
+      border: 1px solid rgba(24, 103, 192, 0.15);
+      border-radius: 4px;
+      padding: 4px 10px;
+      margin-bottom: 14px;
+    }
+
+    .video-card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-gray-50);
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .video-card-desc {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--color-gray-400);
+      margin-bottom: 20px;
+    }
+
+    .video-card-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .video-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-gray-50);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 12px 20px;
+      text-decoration: none;
+      transition: background 0.15s ease, border-color 0.15s ease;
+      min-height: 44px;
+    }
+
+    .video-card-cta:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .video-card-cta:active {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(1px);
+    }
+
+    .video-card-cta:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    .video-card-cta .arrow {
+      transition: transform 0.15s ease;
+      opacity: 0.6;
+    }
+
+    .video-card-cta:hover .arrow {
+      transform: translateX(3px);
+      opacity: 1;
+    }
+
+    /* ===== Reduced Motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .hero-background::after { animation: none; }
+      .aurora-glow { animation: none; }
+      .featured-cta .arrow { transition: none; }
+      .featured-cta:hover .arrow { transform: none; }
+      .button-list-item:hover .button-arrow { transform: none; }
+      .video-card-thumb img { transition: none; }
+      .video-card:hover .video-card-thumb img { transform: none; }
+      .video-card-play { transition: none; }
+      .video-card:hover .video-card-play { transform: translate(-50%, -50%); }
+      .video-card-cta .arrow { transition: none; }
+      .video-card-cta:hover .arrow { transform: none; }
+    }
+
+
+
+    /* ===== Responsive: Tablet (768-1023px) ===== */
+    @media (max-width: 1023px) {
+      .hero-featured-content {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding: 52px 36px 60px;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .hero-tab-bar {
+        padding: 0 36px;
+      }
+
+      .hero-tab {
+        padding: 22px 18px;
+        font-size: 0.875rem;
+      }
+
+      .hero-header {
+        padding: 40px 36px 24px;
+      }
+
+      .tools-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ===== Responsive: Mobile (<768px) ===== */
+    @media (max-width: 767px) {
+      .hero-tab-bar {
+        padding: 0 20px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .hero-tab-bar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .hero-tab {
+        padding: 16px 14px;
+        font-size: 0.8125rem;
+        gap: 8px;
+      }
+      .hero-featured-content {
+        padding: 36px 20px 44px;
+      }
+
+      .hero-text .featured-stats {
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .hero-header {
+        padding: 32px 20px 20px;
+      }
+
+      .button-list-item {
+        padding: 14px 16px;
+        gap: 12px;
+      }
+
+      .button-desc {
+        display: none;
+      }
+
+      .tools-card-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .tools-card {
+        /* Keep min-height: 0 from base; no aspect-ratio on card — image enforces 16:9 */
+      }
+
+      .tools-card-body {
+        padding: 14px 16px 16px;
+      }
+
+      .team-card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .team-row {
+        display: contents;
+      }
+
+      .team-card-body {
+        padding: 12px 14px 14px;
+      }
+
+    }
+
+    /* ===== Responsive: Small Mobile (≤480px) ===== */
+    @media (max-width: 480px) {
+      .team-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    /* Tools panel: intro block on top, cards in 3-column grid below */
+    #panel-tools .hero-featured-content {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    /* Resources panel: same layout as Tools — intro on top, cards in grid below */
+    #panel-resources .hero-featured-content {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    /* Team panel: intro block on top, cards in grid below */
+    #panel-team .hero-featured-content {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+
+    <!-- Hero Header -->
+    <div class="hero-header">
+      <img class="hero-logo" src="assets/img/coe_logo.png" alt="Numerai Council of Elders" width="120" height="120">
+      <h1 id="page-heading">Numerai Council of Elders Hub</h1>
+      <p class="hero-subtitle">A Curated Home for Community Initiatives</p>
+    </div>
+
+    <!-- Featured Hero with Tabs -->
+    <section class="hero-featured" aria-labelledby="featured-heading">
+
+      <!-- Aurora Background -->
+      <div class="hero-background" aria-hidden="true">
+        <div class="aurora-glow"></div>
+      </div>
+
+      <!-- Tab Bar -->
+      <div class="hero-tab-bar" role="tablist" aria-label="Community initiatives">
+        <button class="hero-tab active" role="tab" id="tab-whatsnew" aria-selected="true" aria-controls="panel-whatsnew" data-tab="whatsnew">
+          <span class="tab-emoji" aria-hidden="true">🆕</span>
+          <span class="tab-label">News</span>
+        </button>
+        <button class="hero-tab" role="tab" id="tab-events" aria-selected="false" aria-controls="panel-events" data-tab="events">
+          <span class="tab-emoji" aria-hidden="true">📅</span>
+          <span class="tab-label">Events</span>
+        </button>
+        <button class="hero-tab" role="tab" id="tab-tools" aria-selected="false" aria-controls="panel-tools" data-tab="tools">
+          <span class="tab-emoji" aria-hidden="true">🔧</span>
+          <span class="tab-label">Tools</span>
+        </button>
+        <button class="hero-tab" role="tab" id="tab-marketplace" aria-selected="false" aria-controls="panel-marketplace" data-tab="marketplace">
+          <span class="tab-emoji" aria-hidden="true">🛒</span>
+          <span class="tab-label">NumerBay</span>
+        </button>
+        <button class="hero-tab" role="tab" id="tab-resources" aria-selected="false" aria-controls="panel-resources" data-tab="resources">
+          <span class="tab-emoji" aria-hidden="true">📚</span>
+          <span class="tab-label">Learn</span>
+        </button>
+        <button class="hero-tab" role="tab" id="tab-team" aria-selected="false" aria-controls="panel-team" data-tab="team">
+          <span class="tab-emoji" aria-hidden="true">👥</span>
+          <span class="tab-label">Team</span>
+        </button>
+        <button class="hero-tab" role="tab" id="tab-treasury" aria-selected="false" aria-controls="panel-treasury" data-tab="treasury">
+          <span class="tab-emoji" aria-hidden="true">💰</span>
+          <span class="tab-label">Funds</span>
+        </button>
+      </div>
+
+      <div class="hero-tab-panels">
+
+        <!-- Panel: What's New (default active) -->
+        <div class="hero-tab-panel active" role="tabpanel" id="panel-whatsnew" aria-labelledby="tab-whatsnew">
+          <div class="hero-featured-content">
+            <div class="hero-text">
+              <span class="hero-badge">New Show</span>
+              <h2>Out of Sample</h2>
+              <p class="featured-description">
+                Out of Sample is a community podcast and research show exploring the Numerai ecosystem from every angle. Hosted by Degerhan, each episode features deep conversations with the builders, researchers, and independent thinkers working at the frontier of autonomous AI agents, machine learning model design, and the decentralized tooling that powers it all.
+              </p>
+              <a href="https://www.youtube.com/@NumeraiCoE" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="Visit Numerai Council of Elders YouTube channel">
+                Watch on YouTube <span class="arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+            <a href="https://www.youtube.com/watch?v=pf-N6RF-Ss4" class="hero-visual whatsnew-visual" target="_blank" rel="noopener noreferrer" aria-label="Watch Out of Sample Episode One on YouTube">
+              <img src="https://i1.ytimg.com/vi/pf-N6RF-Ss4/maxresdefault.jpg" alt="Out of Sample Episode One — Autonomous Quant Research with AI Agents" loading="eager" width="1280" height="720">
+              <div class="hero-visual-overlay"></div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Panel: Events (Decentralized AI Days) -->
+        <div class="hero-tab-panel" role="tabpanel" id="panel-events" aria-labelledby="tab-events" hidden>
+          <div class="hero-featured-content">
+            <div class="hero-text">
+              <span class="hero-badge">Global Events</span>
+              <h2>Decentralized AI Days</h2>
+              <p class="featured-description">
+                Decentralized AI Days is a global series of community-organized meetups across cities and continents. Each gathering brings together hands-on workshops, lightning talks, and open discussions on federated learning, on-chain inference, model governance, and open-source tooling — connecting researchers, engineers, and builders shaping the future of user-owned AI.
+              </p>
+              <a href="https://luma.com/decentralized_ai_events" class="featured-cta" aria-label="View Events" target="_blank" rel="noopener noreferrer">
+                View Events <span class="arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+            <div class="hero-visual" aria-label="Decentralized AI Days event screenshot">
+              <img src="assets/img/decentralized-ai-days.jpeg" alt="Conference hall with attendees at a Decentralized AI Days event" loading="lazy">
+              <div class="hero-visual-overlay"></div>
+              <span class="hero-visual-label">Vienna 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel: Tools (3-column card grid below intro) -->
+        <div class="hero-tab-panel" role="tabpanel" id="panel-tools" aria-labelledby="tab-tools" hidden>
+          <div class="hero-featured-content">
+            <div class="hero-text">
+              <span class="hero-badge">Community Tools</span>
+              <h2>Automated Compute and Dashboards</h2>
+              <p class="featured-description">
+                These tools automate model training, run analytics, and surface performance metrics so you can focus on strategy instead of setup. From no-code staking pipelines to live dashboards, they handle the repetitive compute so you stay ahead of the competition.
+              </p>
+            </div>
+            <div class="tools-card-grid">
+              <div class="tools-card">
+                <div class="tools-card-media">
+                  <img
+                    class="tools-card-img"
+                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80"
+                    alt="Numeroo automated model training dashboard"
+                    loading="lazy"
+                    width="600" height="337"
+                  >
+                </div>
+                <div class="tools-card-body">
+                  <h3 class="tools-card-title">Numeroo</h3>
+                  <p class="tools-card-desc">No-code automated model training, evaluation, and staking — connect your Numerai account and let Numeroo handle the full submission pipeline.</p>
+                  <a href="https://numeroo.bot" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="Try Numeroo">
+                    Try Numeroo <span class="arrow" aria-hidden="true">&rarr;</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="tools-card">
+                <div class="tools-card-media">
+                  <img
+                    class="tools-card-img"
+                    src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
+                    alt="Shiny Numerati community dashboard"
+                    loading="lazy"
+                    width="600" height="337"
+                  >
+                </div>
+                <div class="tools-card-body">
+                  <h3 class="tools-card-title">Shiny Numerati</h3>
+                  <p class="tools-card-desc">Community-built dashboard for tracking Numerai Classic Tournament performance, leaderboard stats, and model-level analytics in real time.</p>
+                  <a href="https://huggingface.co/spaces/jofaichow/shiny-numerati" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="View Shiny Numerati">
+                    View Dashboard <span class="arrow" aria-hidden="true">&rarr;</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="tools-card">
+                <div class="tools-card-media">
+                  <img
+                    class="tools-card-img"
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
+                    alt="YAND account-level MMC charts"
+                    loading="lazy"
+                    width="600" height="337"
+                  >
+                </div>
+                <div class="tools-card-body">
+                  <h3 class="tools-card-title">YAND</h3>
+                  <p class="tools-card-desc">Account-level MMC charts, feature correlation views, and side-by-side model comparison — spot what is working and what is not across your Numerai portfolio.</p>
+                  <a href="https://yand.pythonanywhere.com" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="View YAND">
+                    View YAND <span class="arrow" aria-hidden="true">&rarr;</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel: Marketplace (NumerBay) -->
+        <div class="hero-tab-panel" role="tabpanel" id="panel-marketplace" aria-labelledby="tab-marketplace" hidden>
+          <div class="hero-featured-content">
+            <div class="hero-text">
+              <span class="hero-badge">Community Marketplace</span>
+              <h2>NumerBay</h2>
+              <p class="featured-description">
+                NumerBay is a community-built marketplace where you can discover, buy, and sell predictions, machine-learning models, feature sets, and datasets for the Numerai tournament. Every item is submitted, curated, and reviewed by community members, creating an open ecosystem of ready-to-use tools that help you find the best models, strategies, and data to stay competitive.
+              </p>
+              <a href="https://numerbay.ai" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="Visit NumerBay">
+                Visit NumerBay <span class="arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+            <div class="hero-visual" aria-label="NumerBay marketplace screenshot">
+              <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="NumerBay marketplace showing prediction models and data listings" loading="lazy">
+              <div class="hero-visual-overlay"></div>
+              <span class="hero-visual-label">Buy and Sell Predictions</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel: Resources (3-card grid) -->
+        <div class="hero-tab-panel" role="tabpanel" id="panel-resources" aria-labelledby="tab-resources" hidden>
+          <div class="hero-featured-content">
+            <div class="hero-text">
+              <span class="hero-badge">Educational Content</span>
+              <h2>Learn and Explore</h2>
+              <p class="featured-description">
+                Curated learning resources created by Numerai community members — from meetup talks and workshop slides to technical blog posts, video tutorials, and Kaggle notebooks. Whether you are just getting started or sharpening advanced strategies, these materials help you learn Numerai, understand the ecosystem, and improve your models.
+              </p>
+            </div>
+            <div class="tools-card-grid">
+              <div class="tools-card">
+                <div class="tools-card-media">
+                  <img
+                    class="tools-card-img"
+                    src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80"
+                    alt="Conference and meetup event"
+                    loading="lazy"
+                    width="600" height="337"
+                  >
+                </div>
+                <div class="tools-card-body">
+                  <h3 class="tools-card-title">Meetup Materials</h3>
+                  <p class="tools-card-desc">Open-source archive of talks, slides, and workshop materials from Decentralized AI Days events worldwide.</p>
+                  <a href="https://github.com/councilofelders/meetups" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="View Meetup Materials on GitHub">
+                    View on GitHub <span class="arrow" aria-hidden="true">&rarr;</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="tools-card">
+                <div class="tools-card-media">
+                  <img
+                    class="tools-card-img"
+                    src="https://images.unsplash.com/photo-1432821596592-e2c18b78144f?w=600&q=80"
+                    alt="Writing and blogging"
+                    loading="lazy"
+                    width="600" height="337"
+                  >
+                </div>
+                <div class="tools-card-body">
+                  <h3 class="tools-card-title">Blog</h3>
+                  <p class="tools-card-desc">News, technical deep-dives, and community stories from the Council of Elders and the broader Numerai ecosystem.</p>
+                  <a href="https://medium.com/numerai-council-of-elders" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="Read Blog">
+                    Read Blog <span class="arrow" aria-hidden="true">&rarr;</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="tools-card">
+                <div class="tools-card-media">
+                  <img
+                    class="tools-card-img"
+                    src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80"
+                    alt="Video production and recording"
+                    loading="lazy"
+                    width="600" height="337"
+                  >
+                </div>
+                <div class="tools-card-body">
+                  <h3 class="tools-card-title">YouTube Channel</h3>
+                  <p class="tools-card-desc">Event recaps, workshop recordings, panel discussions, and community highlights from the Numerai Council of Elders.</p>
+                  <a href="https://youtube.com/@NumeraiCoE" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="Watch Videos">
+                    Watch Videos <span class="arrow" aria-hidden="true">&rarr;</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="tools-card">
+                <div class="tools-card-media">
+                  <img
+                    class="tools-card-img"
+                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80"
+                    alt="Data notebooks and code"
+                    loading="lazy"
+                    width="600" height="337"
+                  >
+                </div>
+                <div class="tools-card-body">
+                  <h3 class="tools-card-title">Kaggle Notebooks</h3>
+                  <p class="tools-card-desc">Community notebooks for model development, exploration, and sharing Numerai strategies — browse, fork, and learn from fellow numerati.</p>
+                  <a href="https://www.kaggle.com/svendaj/code?query=numerai" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="Browse Notebooks on Kaggle">
+                    Browse Notebooks <span class="arrow" aria-hidden="true">&rarr;</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel: Team -->
+        <div class="hero-tab-panel" role="tabpanel" id="panel-team" aria-labelledby="tab-team" hidden>
+          <div class="hero-featured-content">
+            <div class="hero-text">
+              <span class="hero-badge">About Us</span>
+              <h2>Council of Elders</h2>
+              <p class="featured-description">
+                The Council of Elders is a community-elected body of Numerai participants who bridge the Numerai team and the broader community. We organize events like Decentralized AI Days, build and maintain community tools and dashboards, create educational content, and amplify the community's voice in shaping the ecosystem.
+              </p>
+            </div>
+            <div class="team-card-grid" role="list" aria-label="Elder profiles">
+
+              <!-- Row 1: Elders 1-5 (alphabetical) -->
+              <div class="team-row" role="presentation">
+
+              <!-- Elder 1: aventurine -->
+              <div class="team-card" role="listitem">
+                <div class="team-card-photo">
+                  <img src="assets/img/elders/aventurine.jpg" alt="Portrait of aventurine" loading="lazy" width="400" height="400">
+                </div>
+                <div class="team-card-body">
+                  <div class="team-card-name">aventurine</div>
+                </div>
+              </div>
+
+              <!-- Elder 2: correlator -->
+              <div class="team-card" role="listitem">
+                <div class="team-card-photo">
+                  <img src="assets/img/elders/correlator.png" alt="Portrait of correlator" loading="lazy" width="400" height="400">
+                </div>
+                <div class="team-card-body">
+                  <div class="team-card-name">correlator</div>
+                </div>
+              </div>
+
+              <!-- Elder 3: ia_ai -->
+              <div class="team-card" role="listitem">
+                <div class="team-card-photo">
+                  <img src="assets/img/elders/ia_ai.jpg" alt="Portrait of ia_ai" loading="lazy" width="400" height="400">
+                </div>
+                <div class="team-card-body">
+                  <div class="team-card-name">ia_ai</div>
+                </div>
+              </div>
+
+              <!-- Elder 4: jefferythewind -->
+              <div class="team-card" role="listitem">
+                <div class="team-card-photo">
+                  <img src="assets/img/elders/jefferythewind.jpg" alt="Portrait of jefferythewind" loading="lazy" width="400" height="400">
+                </div>
+                <div class="team-card-body">
+                  <div class="team-card-name">jefferythewind</div>
+                </div>
+              </div>
+
+              <!-- Elder 5: jrb -->
+              <div class="team-card" role="listitem">
+                <div class="team-card-photo">
+                  <img src="assets/img/elders/jrb.jpg" alt="Portrait of jrb" loading="lazy" width="400" height="400">
+                </div>
+                <div class="team-card-body">
+                  <div class="team-card-name">jrb</div>
+                </div>
+              </div>
+
+              </div><!-- /.team-row row-1 -->
+
+              <!-- Row 2: Elders 6-9 (alphabetical) -->
+              <div class="team-row" role="presentation">
+
+              <!-- Elder 6: numerologist -->
+              <div class="team-card" role="listitem">
+                <div class="team-card-photo">
+                  <img src="assets/img/elders/numerologist.jpg" alt="Portrait of numerologist" loading="lazy" width="400" height="400">
+                </div>
+                <div class="team-card-body">
+                  <div class="team-card-name">numerologist</div>
+                </div>
+              </div>
+
+              <!-- Elder 7: shatteredx -->
+              <div class="team-card" role="listitem">
+                <div class="team-card-photo">
+                  <img src="assets/img/elders/shatteredx.jpg" alt="Portrait of shatteredx" loading="lazy" width="400" height="400">
+                </div>
+                <div class="team-card-body">
+                  <div class="team-card-name">shatteredx</div>
+                </div>
+              </div>
+
+              <!-- Elder 8: uuazed -->
+              <div class="team-card" role="listitem">
+                <div class="team-card-photo">
+                  <img src="assets/img/elders/uuazed.jpg" alt="Portrait of uuazed" loading="lazy" width="400" height="400">
+                </div>
+                <div class="team-card-body">
+                  <div class="team-card-name">uuazed</div>
+                </div>
+              </div>
+
+              <!-- Elder 9: wigglemuse -->
+              <div class="team-card" role="listitem">
+                <div class="team-card-photo">
+                  <img src="assets/img/elders/wigglemuse.jpg" alt="Portrait of wigglemuse" loading="lazy" width="400" height="400">
+                </div>
+                <div class="team-card-body">
+                  <div class="team-card-name">wigglemuse</div>
+                </div>
+              </div>
+
+              </div><!-- /.team-row row-2 -->
+
+            </div>
+            <div class="featured-cta-secondary">
+              <a href="https://forum.numer.ai/t/elder-nominations-open-until-april-27-midnight-utc/8265/33" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="View Our Manifesto">View Our Manifesto <span class="arrow" aria-hidden="true">&rarr;</span></a>
+            </div>
+          </div>
+        </div>
+
+          <!-- Panel: Treasury (placeholder) -->
+          <div class="hero-tab-panel" role="tabpanel" id="panel-treasury" aria-labelledby="tab-treasury" hidden>
+          <div class="hero-featured-content">
+            <div class="hero-text">
+              <span class="hero-badge">Our Multi-sig Wallet</span>
+              <h2>Funds</h2>
+              <p class="featured-description">
+                The Numerai Council of Elders is supported by Numerai, who provides the funds to power community initiatives — from organizing Decentralized AI Days events to building open-source tools and educational content. All treasury activity is managed through a Safe multi-sig wallet for full transparency.
+              </p>
+              <a href="https://app.safe.global/home?safe=eth:0xF58B7c28DAF13926329ef0c74FA3f7258f5A9131" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="View Safe Wallet">
+                Safe Wallet <span class="arrow" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+            <div class="hero-visual" aria-label="Funds preview">
+              <img src="assets/img/funds.jpg" alt="Council of Elders multi-sig wallet and funds management" loading="lazy">
+              <div class="hero-visual-overlay"></div>
+              <span class="hero-visual-label">Powered by Numerai</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Designed by ia_ai · Powered by Hermes · Prototype · 2026</p>
+    </footer>
+
+  </div>
+
+  <!-- Minimal JS for ARIA tab behavior (no layout dependency) -->
+  <script>
+    (function() {
+      var tabs = document.querySelectorAll('.hero-tab');
+      var panels = document.querySelectorAll('.hero-tab-panel');
+
+      function activateTab(tab) {
+        tabs.forEach(function(t) {
+          t.setAttribute('aria-selected', 'false');
+          t.classList.remove('active');
+        });
+
+        panels.forEach(function(p) {
+          p.classList.remove('active');
+          p.hidden = true;
+        });
+
+        tab.setAttribute('aria-selected', 'true');
+        tab.classList.add('active');
+
+        var panelId = tab.getAttribute('aria-controls');
+        var panel = document.getElementById(panelId);
+        if (panel) {
+          panel.classList.add('active');
+          panel.hidden = false;
+        }
+      }
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          activateTab(tab);
+        });
+      });
+
+      tabs.forEach(function(tab, index) {
+        tab.addEventListener('keydown', function(e) {
+          var targetTab;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            targetTab = tabs[(index + 1) % tabs.length];
+          } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            targetTab = tabs[(index - 1 + tabs.length) % tabs.length];
+          } else if (e.key === 'Home') {
+            e.preventDefault();
+            targetTab = tabs[0];
+          } else if (e.key === 'End') {
+            e.preventDefault();
+            targetTab = tabs[tabs.length - 1];
+          }
+          if (targetTab) {
+            targetTab.focus();
+            activateTab(targetTab);
+          }
+        });
+      });
+    })();
+
+    // Smart tab text-hide on overflow
+    (function() {
+      var tabBar = document.querySelector('.hero-tab-bar');
+      var tabs = document.querySelectorAll('.hero-tab');
+      
+      function adjustTabLabels() {
+        // First, show all labels to measure true width
+        tabs.forEach(function(tab) {
+          var label = tab.querySelector('.tab-label');
+          if (label) label.style.display = '';
+        });
+        
+        // Check if overflowing
+        if (tabBar.scrollWidth <= tabBar.clientWidth) return;
+        
+        // Hide labels from right to left until it fits
+        for (var i = tabs.length - 1; i >= 0; i--) {
+          var label = tabs[i].querySelector('.tab-label');
+          if (label && label.style.display !== 'none') {
+            label.style.display = 'none';
+            if (tabBar.scrollWidth <= tabBar.clientWidth) break;
+          }
+        }
+      }
+      
+      // Run on load and resize
+      adjustTabLabels();
+      window.addEventListener('resize', adjustTabLabels);
+    })();
+  </script>
+</body>
+</html>

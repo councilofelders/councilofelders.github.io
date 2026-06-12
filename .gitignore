@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+package.json
+package-lock.json
+
+# Internal docs
+docs/
+
+# OS files
+.DS_Store
+Thumbs.db
