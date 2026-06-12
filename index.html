@@ -108,6 +108,56 @@
       letter-spacing: 0.01em;
     }
 
+    /* ===== Social Buttons Row ===== */
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-gray-50);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    .social-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .social-btn:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    .social-btn svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 480px) {
+      .social-btn .social-label {
+        display: none;
+      }
+      .social-btn {
+        padding: 10px 14px;
+      }
+    }
+
     /* ===== Hero Featured Section ===== */
     .hero-featured {
       position: relative;
@@ -994,6 +1044,37 @@
       gap: 16px;
       align-items: start;
     }
+
+    /* ===== Reversed Featured Card: image left, text right ===== */
+    .hero-featured-content--reversed {
+      grid-template-columns: 1fr 1.22fr;
+    }
+
+    /* Reduce gap between cards in News tab */
+    #panel-whatsnew .hero-featured-content + .hero-featured-content {
+      margin-top: -48px;
+    }
+
+    /* CTA button group — side-by-side on desktop, stacked on mobile */
+    .featured-cta-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .featured-cta-group .featured-cta {
+      flex: 1 1 auto;
+    }
+
+    @media (max-width: 767px) {
+      .featured-cta-group {
+        flex-direction: column;
+      }
+      .featured-cta-group .featured-cta {
+        width: 100%;
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1004,6 +1085,7 @@
       <img class="hero-logo" src="assets/img/coe_logo.png" alt="Numerai Council of Elders" width="120" height="120">
       <h1 id="page-heading">Numerai Council of Elders Hub</h1>
       <p class="hero-subtitle">A Curated Home for Community Initiatives</p>
+
     </div>
 
     <!-- Featured Hero with Tabs -->
@@ -1017,16 +1099,16 @@
       <!-- Tab Bar -->
       <div class="hero-tab-bar" role="tablist" aria-label="Community initiatives">
         <button class="hero-tab active" role="tab" id="tab-whatsnew" aria-selected="true" aria-controls="panel-whatsnew" data-tab="whatsnew">
-          <span class="tab-emoji" aria-hidden="true">🆕</span>
-          <span class="tab-label">News</span>
+          <span class="tab-emoji" aria-hidden="true">🏠</span>
+          <span class="tab-label">Home</span>
+        </button>
+        <button class="hero-tab" role="tab" id="tab-tools" aria-selected="false" aria-controls="panel-tools" data-tab="tools">
+          <span class="tab-emoji" aria-hidden="true">🛠️</span>
+          <span class="tab-label">Projects</span>
         </button>
         <button class="hero-tab" role="tab" id="tab-events" aria-selected="false" aria-controls="panel-events" data-tab="events">
           <span class="tab-emoji" aria-hidden="true">📅</span>
           <span class="tab-label">Events</span>
-        </button>
-        <button class="hero-tab" role="tab" id="tab-tools" aria-selected="false" aria-controls="panel-tools" data-tab="tools">
-          <span class="tab-emoji" aria-hidden="true">🔧</span>
-          <span class="tab-label">Projects</span>
         </button>
         <button class="hero-tab" role="tab" id="tab-marketplace" aria-selected="false" aria-controls="panel-marketplace" data-tab="marketplace">
           <span class="tab-emoji" aria-hidden="true">🛒</span>
@@ -1052,7 +1134,7 @@
         <div class="hero-tab-panel active" role="tabpanel" id="panel-whatsnew" aria-labelledby="tab-whatsnew">
           <div class="hero-featured-content">
             <div class="hero-text">
-              <span class="hero-badge">New Show</span>
+              <span class="hero-badge">Spotlight</span>
               <h2>Out of Sample</h2>
               <p class="featured-description">
                 Out of Sample is a community podcast and research show exploring the Numerai ecosystem from every angle. Hosted by Degerhan, each episode features deep conversations with the builders, researchers, and independent thinkers working at the frontier of autonomous AI agents, machine learning model design, and the decentralized tooling that powers it all.
@@ -1066,8 +1148,30 @@
               <div class="hero-visual-overlay"></div>
             </a>
           </div>
-        </div>
 
+          <!-- Join the Discussion card (reversed layout: image left, text right) -->
+          <div class="hero-featured-content hero-featured-content--reversed">
+            <a href="assets/img/join_the_discussion.jpg" class="hero-visual" target="_blank" rel="noopener noreferrer" aria-label="Join the Numerai community discussion">
+              <img src="assets/img/join_the_discussion.jpg" alt="Join the Numerai community discussion" loading="lazy" width="1280" height="720">
+              <div class="hero-visual-overlay"></div>
+            </a>
+            <div class="hero-text">
+              <span class="hero-badge">Community</span>
+              <h2>Join the Discussion</h2>
+              <p class="featured-description">
+                Connect with fellow Numerai researchers, builders, and community members. Share strategies, ask questions, and stay up to date with the latest developments — all in real time.
+              </p>
+              <div class="featured-cta-group">
+                <a href="https://x.com/NumeraiCoE" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="Follow Numerai Council of Elders on X">
+                  Follow on <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: -2px; margin: 0 4px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> <span class="arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <a href="https://discord.gg/numerai" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="Join Numerai Discord server">
+                  Join Discord <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: -2px; margin: 0 4px;"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg> <span class="arrow" aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Panel: Events (Decentralized AI Days) -->
         <div class="hero-tab-panel" role="tabpanel" id="panel-events" aria-labelledby="tab-events" hidden>
           <div class="hero-featured-content">
@@ -1451,10 +1555,10 @@
           <div class="hero-tab-panel" role="tabpanel" id="panel-treasury" aria-labelledby="tab-treasury" hidden>
           <div class="hero-featured-content">
             <div class="hero-text">
-              <span class="hero-badge">Our Multi-sig Wallet</span>
-              <h2>Funds</h2>
+              <span class="hero-badge">The CoE Treasury</span>
+              <h2>Our Multi-sig Wallet</h2>
               <p class="featured-description">
-                The Numerai Council of Elders is supported by Numerai, who provides the funds to power community initiatives — from organizing Decentralized AI Days events to building open-source tools and educational content. All treasury activity is managed through a Safe multi-sig wallet for full transparency.
+                The Numerai Council of Elders is supported by Numerai, which provides the funds to power community initiatives—from organizing Decentralized AI Days events to building open-source tools and creating educational content. All treasury activity is managed through a Safe multi-sig wallet for full transparency.
               </p>
               <a href="https://app.safe.global/home?safe=eth:0xF58B7c28DAF13926329ef0c74FA3f7258f5A9131" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="View Safe Wallet">
                 Safe Wallet <span class="arrow" aria-hidden="true">&rarr;</span>
