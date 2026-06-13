@@ -339,7 +339,7 @@
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--color-gray-500);
+      color: var(--color-gray-400);
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 4px;
@@ -688,6 +688,15 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.2s ease;
+    }
+
+    .team-card-photo a:hover img {
+      transform: scale(1.05);
+    }
+
+    .team-card-photo a:hover + .team-card-body .team-card-name {
+      color: var(--color-gray-50);
     }
 
     .team-card-name {
@@ -752,159 +761,6 @@
       opacity: 0.8;
     }
 
-    /* ===== Video Card Component ===== */
-    .video-card {
-      position: relative;
-      display: block;
-      text-decoration: none;
-      border-radius: var(--card-radius);
-      overflow: hidden;
-      border: 1px solid var(--card-border);
-      background: var(--card-bg);
-      transition: border-color var(--card-transition), box-shadow var(--card-transition);
-    }
-
-    .video-card:hover {
-      border-color: var(--card-border-hover);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-
-    .video-card-thumb {
-      position: relative;
-      display: block;
-      overflow: hidden;
-      aspect-ratio: 16 / 9;
-      background: var(--color-gray-800);
-    }
-
-    .video-card-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.3s ease;
-    }
-
-    .video-card:hover .video-card-thumb img {
-      transform: scale(1.03);
-    }
-
-    .video-card-play {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-      pointer-events: none;
-    }
-
-    .video-card:hover .video-card-play {
-      background: rgba(24, 103, 192, 0.8);
-      border-color: rgba(24, 103, 192, 0.9);
-      transform: translate(-50%, -50%) scale(1.08);
-    }
-
-    .video-card-play::after {
-      content: '';
-      display: block;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 10px 0 10px 18px;
-      border-color: transparent transparent transparent #fff;
-      margin-left: 3px;
-    }
-
-    .video-card-info {
-      padding: var(--card-padding);
-    }
-
-    .video-card-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.6875rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--cat-whatsnew);
-      background: var(--cat-whatsnew-bg);
-      border: 1px solid rgba(24, 103, 192, 0.15);
-      border-radius: 4px;
-      padding: 4px 10px;
-      margin-bottom: 14px;
-    }
-
-    .video-card-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--color-gray-50);
-      letter-spacing: -0.01em;
-      margin-bottom: 8px;
-    }
-
-    .video-card-desc {
-      font-size: 0.9375rem;
-      line-height: 1.6;
-      color: var(--color-gray-400);
-      margin-bottom: 20px;
-    }
-
-    .video-card-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .video-card-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      color: var(--color-gray-50);
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 8px;
-      padding: 12px 20px;
-      text-decoration: none;
-      transition: background 0.15s ease, border-color 0.15s ease;
-      min-height: 44px;
-    }
-
-    .video-card-cta:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.22);
-    }
-
-    .video-card-cta:active {
-      background: rgba(255, 255, 255, 0.14);
-      transform: translateY(1px);
-    }
-
-    .video-card-cta:focus-visible {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-
-    .video-card-cta .arrow {
-      transition: transform 0.15s ease;
-      opacity: 0.6;
-    }
-
-    .video-card-cta:hover .arrow {
-      transform: translateX(3px);
-      opacity: 1;
-    }
-
     /* ===== Reduced Motion ===== */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -913,12 +769,6 @@
       .featured-cta .arrow { transition: none; }
       .featured-cta:hover .arrow { transform: none; }
       .button-list-item:hover .button-arrow { transform: none; }
-      .video-card-thumb img { transition: none; }
-      .video-card:hover .video-card-thumb img { transform: none; }
-      .video-card-play { transition: none; }
-      .video-card:hover .video-card-play { transform: translate(-50%, -50%); }
-      .video-card-cta .arrow { transition: none; }
-      .video-card-cta:hover .arrow { transform: none; }
     }
 
 
@@ -1087,9 +937,34 @@
         justify-content: center;
       }
     }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .skip-link:focus {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: auto;
+      height: auto;
+      padding: 8px 16px;
+      background: var(--color-gray-900);
+      color: var(--color-gray-50);
+      border: 2px solid var(--color-gray-50);
+      border-radius: 4px;
+      z-index: 10000;
+      font-size: 0.875rem;
+    }
   </style>
 </head>
 <body>
+  <a href="#page-heading" class="skip-link">Skip to content</a>
   <div class="page-container">
 
     <!-- Hero Header -->
@@ -1537,8 +1412,8 @@
           </div>
         </div>
 
-          <!-- Panel: Treasury (placeholder) -->
-          <div class="hero-tab-panel" role="tabpanel" id="panel-treasury" aria-labelledby="tab-treasury" hidden>
+        <!-- Panel: Treasury (placeholder) -->
+        <div class="hero-tab-panel" role="tabpanel" id="panel-treasury" aria-labelledby="tab-treasury" hidden>
           <div class="hero-featured-content">
             <div class="hero-text">
               <span class="hero-badge">The CoE Treasury</span>
