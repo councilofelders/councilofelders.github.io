@@ -35,8 +35,6 @@
       --cat-events-bg: rgba(72, 169, 166, 0.08);
       --cat-tools: #9B59B6;
       --cat-tools-bg: rgba(155, 89, 182, 0.08);
-      --cat-marketplace: #E67E22;
-      --cat-marketplace-bg: rgba(230, 126, 34, 0.08);
       --cat-resources: #2ECC71;
       --cat-resources-bg: rgba(46, 204, 113, 0.08);
       --cat-treasury: #E74C3C;
@@ -367,7 +365,6 @@
       letter-spacing: -0.01em;
     }
 
-    .hero-text .featured-name[data-category="marketplace"] { color: var(--cat-marketplace); }
     .hero-text .featured-name[data-category="events"] { color: var(--cat-events); }
     .hero-text .featured-name[data-category="tools"] { color: var(--cat-tools); }
     .hero-text .featured-name[data-category="resources"] { color: var(--cat-resources); }
@@ -1125,10 +1122,6 @@
           <span class="tab-emoji" aria-hidden="true">📅</span>
           <span class="tab-label">Events</span>
         </button>
-        <button class="hero-tab" role="tab" id="tab-marketplace" aria-selected="false" aria-controls="panel-marketplace" data-tab="marketplace">
-          <span class="tab-emoji" aria-hidden="true">🛒</span>
-          <span class="tab-label">NumerBay</span>
-        </button>
         <button class="hero-tab" role="tab" id="tab-resources" aria-selected="false" aria-controls="panel-resources" data-tab="resources">
           <span class="tab-emoji" aria-hidden="true">📚</span>
           <span class="tab-label">Learn</span>
@@ -1212,12 +1205,31 @@
           <div class="hero-featured-content">
             <div class="hero-text">
               <span class="hero-badge">Community Projects</span>
-              <h2>Built by the Community</h2>
+              <h2>Built by Numeratis</h2>
               <p class="featured-description">
-                Community-built projects spanning automation, analytics, and dashboards — from no-code staking pipelines to live performance trackers and tokenomics dashboards. Built by Numerai community members to help you focus on strategy instead of setup.
+                From marketplaces and automation pipelines to live dashboards and leaderboards — tools created by Numerai community members to help you focus on strategy instead of setup.
               </p>
             </div>
             <div class="tools-card-grid">
+              <div class="tools-card">
+                <div class="tools-card-media">
+                  <img
+                    class="tools-card-img"
+                    src="assets/img/numerbay.jpg"
+                    alt="NumerBay marketplace showing prediction models and data listings"
+                    loading="lazy"
+                    width="600" height="337"
+                  >
+                </div>
+                <div class="tools-card-body">
+                  <h3 class="tools-card-title">NumerBay</h3>
+                  <p class="tools-card-desc">A community-built marketplace for buying and selling predictions, ML models, feature sets, and datasets for the Numerai tournament.</p>
+                  <a href="https://numerbay.ai" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="Visit NumerBay">
+                    Visit NumerBay <span class="arrow" aria-hidden="true">&rarr;</span>
+                  </a>
+                </div>
+              </div>
+
               <div class="tools-card">
                 <div class="tools-card-media">
                   <img
@@ -1331,26 +1343,6 @@
                   </a>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel: Marketplace (NumerBay) -->
-        <div class="hero-tab-panel" role="tabpanel" id="panel-marketplace" aria-labelledby="tab-marketplace" hidden>
-          <div class="hero-featured-content">
-            <div class="hero-text">
-              <span class="hero-badge">Community Marketplace</span>
-              <h2>NumerBay</h2>
-              <p class="featured-description">
-                NumerBay is a community-built marketplace where you can discover, buy, and sell predictions, machine-learning models, feature sets, and datasets for the Numerai tournament. Every item is submitted, curated, and reviewed by community members, creating an open ecosystem of ready-to-use tools that help you find the best models, strategies, and data to stay competitive.
-              </p>
-              <a href="https://numerbay.ai" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="Visit NumerBay">
-                Visit NumerBay <span class="arrow" aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
-            <div class="hero-visual" aria-label="NumerBay marketplace screenshot">
-              <img src="assets/img/numerbay.jpg" alt="NumerBay marketplace showing prediction models and data listings" loading="lazy">
-              <div class="hero-visual-overlay"></div>
             </div>
           </div>
         </div>
