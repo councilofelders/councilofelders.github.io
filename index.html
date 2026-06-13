@@ -1640,14 +1640,11 @@
         // Check if overflowing
         if (tabBar.scrollWidth <= tabBar.clientWidth) return;
         
-        // Hide labels from right to left until it fits
-        for (var i = tabs.length - 1; i >= 0; i--) {
-          var label = tabs[i].querySelector('.tab-label');
-          if (label && label.style.display !== 'none') {
-            label.style.display = 'none';
-            if (tabBar.scrollWidth <= tabBar.clientWidth) break;
-          }
-        }
+        // If ANY label would need hiding, hide ALL labels (emoji-only mode)
+        tabs.forEach(function(tab) {
+          var label = tab.querySelector('.tab-label');
+          if (label) label.style.display = 'none';
+        });
       }
       
       // Run on load and resize
