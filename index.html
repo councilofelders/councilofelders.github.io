@@ -440,10 +440,49 @@
       outline-offset: 2px;
     }
 
-    .featured-cta-secondary {
+    .cta-group {
       display: flex;
-      justify-content: center;
-      margin-top: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .featured-cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-gray-300);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 13px 24px;
+      text-decoration: none;
+      width: fit-content;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      min-height: 44px;
+    }
+
+    .featured-cta-secondary:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: var(--color-gray-50);
+    }
+
+    .featured-cta-secondary:active {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(1px);
+    }
+
+    .featured-cta-secondary .arrow {
+      transition: transform 0.15s ease;
+      opacity: 0.6;
+    }
+
+    .featured-cta-secondary:hover .arrow {
+      transform: translateX(3px);
+      opacity: 1;
     }
 
     .featured-cta .arrow {
@@ -761,6 +800,133 @@
       opacity: 0.8;
     }
 
+
+    /* ===== Events Timeline (v9 circle photo dots) ===== */
+    .coa-events-timeline-section {
+      padding: 0 48px 48px;
+    }
+
+    .coa-timeline {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .coa-timeline::before {
+      content: '';
+      position: absolute;
+      left: 100px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255,255,255,0.15);
+      transform: translateX(-50%);
+    }
+
+    .coa-year-marker {
+      padding: 20px 0 10px;
+    }
+
+    .coa-year-marker:first-child {
+      padding-top: 0;
+    }
+
+    .coa-year-label {
+      display: inline-block;
+      margin-left: 200px;
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--color-gray-500);
+      letter-spacing: 0.04em;
+    }
+
+    .coa-timeline-event {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 10px 0 10px 55px;
+      min-height: 72px;
+      transition: transform 0.2s ease;
+    }
+
+    .coa-timeline-event:hover {
+      transform: translateX(4px);
+    }
+
+    .coa-event-photo {
+      flex-shrink: 0;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.12);
+      background: var(--color-gray-800);
+      position: relative;
+      z-index: 1;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .coa-timeline-event:hover .coa-event-photo {
+      border-color: rgba(255,255,255,0.25);
+      transform: scale(1.08);
+    }
+
+    .coa-event-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .coa-event-details {
+      flex: 1;
+      min-width: 0;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .coa-event-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .coa-event-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-gray-50);
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .coa-event-date {
+      font-size: 1rem;
+      color: var(--color-gray-500);
+      font-weight: 500;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .coa-event-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.9375rem;
+      color: var(--color-gray-400);
+    }
+
+    .coa-event-location svg {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+      opacity: 0.55;
+    }
     /* ===== Reduced Motion ===== */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -769,6 +935,8 @@
       .featured-cta .arrow { transition: none; }
       .featured-cta:hover .arrow { transform: none; }
       .button-list-item:hover .button-arrow { transform: none; }
+      .coa-timeline-event { transition: none; }
+      .coa-event-photo { transition: none; }
     }
 
 
@@ -800,6 +968,10 @@
 
       .tools-card-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .coa-events-timeline-section {
+        padding: 0 36px 48px;
       }
     }
 
@@ -868,6 +1040,46 @@
 
       .team-card-body {
         padding: 12px 14px 14px;
+      }
+
+      .coa-events-timeline-section {
+        padding: 0 20px 44px;
+      }
+
+      .coa-timeline::before {
+        left: 44px;
+      }
+
+      .coa-year-label {
+        margin-left: 80px;
+        font-size: 1.25rem;
+      }
+
+      .coa-event-photo {
+        width: 58px;
+        height: 58px;
+      }
+
+      .coa-event-details {
+        padding-left: 14px;
+      }
+
+      .coa-event-name {
+        font-size: 1rem;
+        white-space: normal;
+      }
+
+      .coa-event-date {
+        font-size: 0.875rem;
+      }
+
+      .coa-event-location {
+        font-size: 0.875rem;
+      }
+
+      .coa-timeline-event {
+        padding-left: 15px;
+        min-height: 52px;
       }
 
     }
@@ -1059,13 +1271,13 @@
         <div class="hero-tab-panel" role="tabpanel" id="panel-events" aria-labelledby="tab-events" hidden>
           <div class="hero-featured-content">
             <div class="hero-text">
-              <span class="hero-badge">Global Events</span>
+              <span class="hero-badge">Join the AI + Web3 Momentum</span>
               <h2>Decentralized AI Days</h2>
               <p class="featured-description">
-                Decentralized AI Days is a global series of community-organized meetups across cities and continents. Each gathering brings together hands-on workshops, lightning talks, and open discussions on federated learning, on-chain inference, model governance, and open-source tooling — connecting researchers, engineers, and builders shaping the future of user-owned AI.
+                What started as local Numerai meetups has grown into a global movement. Our Decentralized AI Days are zero-hype events where the brightest minds connect. The momentum behind AI and Web3 is growing fast — join us to collaborate with top builders and help shape the future of user-owned AI.
               </p>
-              <a href="https://luma.com/decentralized_ai_events" class="featured-cta" aria-label="View Events" target="_blank" rel="noopener noreferrer">
-                View Events <span class="arrow" aria-hidden="true">&rarr;</span>
+              <a href="https://luma.com/decentralized_ai_events" class="featured-cta" style="margin-top: 8px;" aria-label="Subscribe to Our Event Calendar" target="_blank" rel="noopener noreferrer">
+                Subscribe to Our Event Calendar <span class="arrow" aria-hidden="true">&rarr;</span>
               </a>
             </div>
             <div class="hero-visual" aria-label="Decentralized AI Days event screenshot">
@@ -1073,6 +1285,295 @@
               <div class="hero-visual-overlay"></div>
             </div>
           </div>
+
+          <!-- ===== v9 circle-photo timeline (15 events) ===== -->
+          <div class="coa-events-timeline-section">
+
+            <div class="coa-timeline" role="list" aria-label="Event timeline">
+
+              <!-- ===== 2026 ===== -->
+              <div class="coa-year-marker" role="listitem">
+                <span class="coa-year-label">2026</span>
+              </div>
+
+              <!-- 15. Decentralized AI Day Tokyo 2026 — May 2026 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=480&h=270&fit=crop&crop=center" alt="Tokyo city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Decentralized AI Day Tokyo</span>
+                    <span class="coa-event-date">May 2026</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Tokyo, Japan
+                  </span>
+                </div>
+              </div>
+
+              <!-- 14. Decentralized AI Day Vienna 2026 — Mar 2026 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1516550135131-fe3dcb0bedc7?w=480&h=270&fit=crop&crop=center" alt="Vienna city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Decentralized AI Day Vienna</span>
+                    <span class="coa-event-date">Mar 2026</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Vienna, Austria
+                  </span>
+                </div>
+              </div>
+
+              <!-- 13. Decentralized AI Day San Francisco — Jan 2026 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=480&h=270&fit=crop&crop=center" alt="San Francisco city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Decentralized AI Day San Francisco</span>
+                    <span class="coa-event-date">Jan 2026</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    San Francisco, USA
+                  </span>
+                </div>
+              </div>
+
+              <!-- ===== 2025 ===== -->
+              <div class="coa-year-marker" role="listitem">
+                <span class="coa-year-label">2025</span>
+              </div>
+
+              <!-- 12. Decentralized AI Day Vienna — Sep 2025 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1516550135131-fe3dcb0bedc7?w=480&h=270&fit=crop&crop=center" alt="Vienna city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Decentralized AI Day Vienna</span>
+                    <span class="coa-event-date">Sep 2025</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Vienna, Austria
+                  </span>
+                </div>
+              </div>
+
+              <!-- 11. Decentralized AI Day Tokyo — May 2025 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=480&h=270&fit=crop&crop=center" alt="Tokyo city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Decentralized AI Day Tokyo</span>
+                    <span class="coa-event-date">May 2025</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Tokyo, Japan
+                  </span>
+                </div>
+              </div>
+
+              <!-- 10. Decentralized AI Day Seattle — Mar 2025 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1502175353174-a7a70e73b362?w=480&h=270&fit=crop&crop=center" alt="Seattle city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Decentralized AI Day Seattle</span>
+                    <span class="coa-event-date">Mar 2025</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Seattle, USA
+                  </span>
+                </div>
+              </div>
+
+              <!-- ===== 2024 ===== -->
+              <div class="coa-year-marker" role="listitem">
+                <span class="coa-year-label">2024</span>
+              </div>
+
+              <!-- 9. Numerai CoE Bangkok Meetup — Nov 2024 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=480&h=270&fit=crop&crop=center" alt="Bangkok city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Numerai CoE Bangkok Meetup</span>
+                    <span class="coa-event-date">Nov 2024</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Bangkok, Thailand
+                  </span>
+                </div>
+              </div>
+
+              <!-- 8. Numerai CoE Tokyo Meetup — Jul 2024 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=480&h=270&fit=crop&crop=center" alt="Tokyo city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Numerai CoE Tokyo Meetup</span>
+                    <span class="coa-event-date">Jul 2024</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Tokyo, Japan
+                  </span>
+                </div>
+              </div>
+
+              <!-- 7. Numerai CoE Frankfurt Meetup — Apr 2024 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=480&h=270&fit=crop&crop=center" alt="Frankfurt city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Numerai CoE Frankfurt Meetup</span>
+                    <span class="coa-event-date">Apr 2024</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Frankfurt, Germany
+                  </span>
+                </div>
+              </div>
+
+              <!-- 6. Numerai CoE SF Meetup — Jan 2024 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=480&h=270&fit=crop&crop=center" alt="San Francisco city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Numerai CoE SF Meetup</span>
+                    <span class="coa-event-date">Jan 2024</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    San Francisco, USA
+                  </span>
+                </div>
+              </div>
+
+              <!-- ===== 2023 ===== -->
+              <div class="coa-year-marker" role="listitem">
+                <span class="coa-year-label">2023</span>
+              </div>
+
+              <!-- 5. Numerai CoE Toronto Meetup — Oct 2023 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1517935706615-2717063c2225?w=480&h=270&fit=crop&crop=center" alt="Toronto city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Numerai CoE Toronto Meetup</span>
+                    <span class="coa-event-date">Oct 2023</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Toronto, Canada
+                  </span>
+                </div>
+              </div>
+
+              <!-- 4. Numerai CoE Prague Meetup — Jul 2023 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1541849546-216549ae216d?w=480&h=270&fit=crop&crop=center" alt="Prague city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Numerai CoE Prague Meetup</span>
+                    <span class="coa-event-date">Jul 2023</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Prague, Czech Republic
+                  </span>
+                </div>
+              </div>
+
+              <!-- 3. Numerai CoE Tokyo Meetup — Apr 2023 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=480&h=270&fit=crop&crop=center" alt="Tokyo city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Numerai CoE Tokyo Meetup</span>
+                    <span class="coa-event-date">Apr 2023</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Tokyo, Japan
+                  </span>
+                </div>
+              </div>
+
+              <!-- ===== 2022 ===== -->
+              <div class="coa-year-marker" role="listitem">
+                <span class="coa-year-label">2022</span>
+              </div>
+
+              <!-- 2. Numerai CoE NYC Meetup — Sep 2022 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=480&h=270&fit=crop&crop=center" alt="New York City skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Numerai CoE NYC Meetup</span>
+                    <span class="coa-event-date">Sep 2022</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    New York City, USA
+                  </span>
+                </div>
+              </div>
+
+              <!-- 1. Numerai CoE London Meetup — Jul 2022 -->
+              <div class="coa-timeline-event" role="listitem">
+                <div class="coa-event-photo">
+                  <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=480&h=270&fit=crop&crop=center" alt="London city skyline" loading="lazy">
+                </div>
+                <div class="coa-event-details">
+                  <div class="coa-event-header">
+                    <span class="coa-event-name">Numerai CoE London Meetup</span>
+                    <span class="coa-event-date">Jul 2022</span>
+                  </div>
+                  <span class="coa-event-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    The Microsoft Reactor, London
+                  </span>
+                </div>
+              </div>
+
+            </div><!-- /.coa-timeline -->
+          </div><!-- /.coa-events-timeline-section -->
+
         </div>
 
         <!-- Panel: Tools (3-column card grid below intro) -->
