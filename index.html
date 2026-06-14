@@ -657,6 +657,51 @@
       opacity: 0.7;
     }
 
+    /* QR overlay — click-to-expand */
+    .qr-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(22, 22, 23, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 24px;
+      cursor: pointer;
+    }
+    .qr-overlay.active {
+      display: flex;
+    }
+    .qr-overlay .qr-wrapper {
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      padding: 8px;
+      display: inline-block;
+      cursor: default;
+    }
+    .qr-overlay .qr-wrapper svg {
+      display: block;
+      width: min(65vh, 65vw);
+      height: min(65vh, 65vw);
+    }
+    .qr-overlay .qr-label {
+      font-size: 1.125rem;
+      color: var(--color-gray-50);
+      letter-spacing: 0.03em;
+      opacity: 0.8;
+    }
+    .qr-overlay .qr-close-hint {
+      font-size: 0.75rem;
+      color: var(--color-gray-500);
+      opacity: 0.5;
+    }
+
 
     /* ===== Events Timeline (v9 circle photo dots) ===== */
     .coa-events-timeline-section {
@@ -1784,6 +1829,16 @@
 
   </div>
 
+  <!-- QR overlay for expanded view -->
+  <div class="qr-overlay" id="qr-overlay" role="dialog" aria-modal="true" aria-label="QR code enlarged">
+    <div class="qr-wrapper"><svg viewBox="0 0 246 246" xmlns="http://www.w3.org/2000/svg">
+  <rect width="246" height="246" fill="transparent"/>
+  <path fill="#ffffff" d="M36 36h42v6h-42z M84 36h18v6h-18z M168 36h42v6h-42z M36 42h6v6h-6z M72 42h6v6h-6z M96 42h18v6h-18z M132 42h30v6h-30z M168 42h6v6h-6z M204 42h6v6h-6z M36 48h6v6h-6z M48 48h18v6h-18z M72 48h6v6h-6z M90 48h6v6h-6z M102 48h18v6h-18z M126 48h30v6h-30z M168 48h6v6h-6z M180 48h18v6h-18z M204 48h6v6h-6z M36 54h6v6h-6z M48 54h18v6h-18z M72 54h6v6h-6z M84 54h30v6h-30z M120 54h18v6h-18z M156 54h6v6h-6z M168 54h6v6h-6z M180 54h18v6h-18z M204 54h6v6h-6z M36 60h6v6h-6z M48 60h18v6h-18z M72 60h6v6h-6z M84 60h12v6h-12z M102 60h6v6h-6z M114 60h12v6h-12z M132 60h18v6h-18z M168 60h6v6h-6z M180 60h18v6h-18z M204 60h6v6h-6z M36 66h6v6h-6z M72 66h6v6h-6z M84 66h12v6h-12z M102 66h30v6h-30z M138 66h6v6h-6z M150 66h6v6h-6z M168 66h6v6h-6z M204 66h6v6h-6z M36 72h42v6h-42z M84 72h6v6h-6z M96 72h6v6h-6z M108 72h6v6h-6z M120 72h6v6h-6z M132 72h6v6h-6z M144 72h6v6h-6z M156 72h6v6h-6z M168 72h42v6h-42z M84 78h6v6h-6z M96 78h6v6h-6z M120 78h6v6h-6z M138 78h6v6h-6z M156 78h6v6h-6z M36 84h6v6h-6z M60 84h6v6h-6z M72 84h18v6h-18z M102 84h6v6h-6z M114 84h18v6h-18z M138 84h6v6h-6z M150 84h42v6h-42z M204 84h6v6h-6z M42 90h6v6h-6z M54 90h6v6h-6z M66 90h6v6h-6z M78 90h6v6h-6z M90 90h24v6h-24z M144 90h6v6h-6z M168 90h42v6h-42z M36 96h6v6h-6z M48 96h6v6h-6z M60 96h24v6h-24z M102 96h6v6h-6z M114 96h18v6h-18z M144 96h6v6h-6z M162 96h24v6h-24z M204 96h6v6h-6z M42 102h12v6h-12z M60 102h12v6h-12z M78 102h12v6h-12z M96 102h6v6h-6z M108 102h12v6h-12z M138 102h12v6h-12z M156 102h6v6h-6z M180 102h12v6h-12z M198 102h12v6h-12z M54 108h12v6h-12z M72 108h6v6h-6z M84 108h6v6h-6z M96 108h12v6h-12z M114 108h6v6h-6z M126 108h6v6h-6z M138 108h6v6h-6z M150 108h18v6h-18z M198 108h6v6h-6z M48 114h6v6h-6z M78 114h12v6h-12z M96 114h6v6h-6z M108 114h24v6h-24z M138 114h12v6h-12z M168 114h42v6h-42z M36 120h6v6h-6z M60 120h6v6h-6z M72 120h6v6h-6z M90 120h12v6h-12z M126 120h6v6h-6z M138 120h6v6h-6z M162 120h6v6h-6z M186 120h12v6h-12z M204 120h6v6h-6z M36 126h12v6h-12z M54 126h12v6h-12z M78 126h6v6h-6z M90 126h6v6h-6z M108 126h6v6h-6z M120 126h6v6h-6z M138 126h12v6h-12z M156 126h6v6h-6z M168 126h6v6h-6z M198 126h12v6h-12z M42 132h6v6h-6z M54 132h6v6h-6z M72 132h12v6h-12z M90 132h6v6h-6z M102 132h30v6h-30z M138 132h6v6h-6z M156 132h12v6h-12z M174 132h6v6h-6z M198 132h6v6h-6z M36 138h6v6h-6z M60 138h6v6h-6z M84 138h18v6h-18z M108 138h6v6h-6z M126 138h12v6h-12z M168 138h24v6h-24z M198 138h12v6h-12z M48 144h6v6h-6z M66 144h18v6h-18z M96 144h12v6h-12z M114 144h18v6h-18z M138 144h12v6h-12z M156 144h6v6h-6z M180 144h6v6h-6z M192 144h6v6h-6z M204 144h6v6h-6z M48 150h12v6h-12z M66 150h6v6h-6z M84 150h6v6h-6z M102 150h18v6h-18z M126 150h18v6h-18z M156 150h18v6h-18z M180 150h6v6h-6z M198 150h12v6h-12z M36 156h12v6h-12z M54 156h24v6h-24z M96 156h6v6h-6z M114 156h6v6h-6z M126 156h6v6h-6z M138 156h6v6h-6z M150 156h42v6h-42z M204 156h6v6h-6z M84 162h12v6h-12z M108 162h54v6h-54z M180 162h6v6h-6z M204 162h6v6h-6z M36 168h42v6h-42z M84 168h6v6h-6z M96 168h6v6h-6z M126 168h18v6h-18z M150 168h12v6h-12z M168 168h6v6h-6z M180 168h18v6h-18z M204 168h6v6h-6z M36 174h6v6h-6z M72 174h6v6h-6z M96 174h6v6h-6z M120 174h6v6h-6z M138 174h6v6h-6z M150 174h12v6h-12z M180 174h6v6h-6z M198 174h6v6h-6z M36 180h6v6h-6z M48 180h18v6h-18z M72 180h6v6h-6z M84 180h6v6h-6z M96 180h6v6h-6z M108 180h24v6h-24z M138 180h6v6h-6z M150 180h42v6h-42z M36 186h6v6h-6z M48 186h18v6h-18z M72 186h6v6h-6z M96 186h12v6h-12z M126 186h6v6h-6z M150 186h6v6h-6z M162 186h6v6h-6z M204 186h6v6h-6z M36 192h6v6h-6z M48 192h18v6h-18z M72 192h6v6h-6z M90 192h12v6h-12z M126 192h30v6h-30z M162 192h6v6h-6z M186 192h24v6h-24z M36 198h6v6h-6z M72 198h6v6h-6z M90 198h18v6h-18z M114 198h12v6h-12z M132 198h18v6h-18z M156 198h6v6h-6z M180 198h12v6h-12z M198 198h12v6h-12z M36 204h42v6h-42z M84 204h6v6h-6z M96 204h6v6h-6z M114 204h6v6h-6z M138 204h6v6h-6z M156 204h18v6h-18z M180 204h12v6h-12z M198 204h6v6h-6z"/>
+</svg></div>
+    <span class="qr-label">Scan to visit</span>
+    <span class="qr-close-hint">Tap anywhere or press ESC to close</span>
+  </div>
+
   <!-- Minimal JS for ARIA tab behavior (no layout dependency) -->
   <script>
     (function() {
@@ -1916,6 +1971,26 @@
             window.location.hash = hashName;
           }
         });
+      });
+    })();
+
+    // QR overlay — click to expand, click/ESC to close
+    (function() {
+      var trigger = document.querySelector('.qr-footer .qr-wrapper');
+      var overlay = document.getElementById('qr-overlay');
+      if (!trigger || !overlay) return;
+
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        overlay.classList.add('active');
+      });
+
+      overlay.addEventListener('click', function() {
+        overlay.classList.remove('active');
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') overlay.classList.remove('active');
       });
     })();
   </script>
