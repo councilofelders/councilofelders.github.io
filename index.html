@@ -1833,6 +1833,51 @@
       adjustTabLabels();
       window.addEventListener('resize', adjustTabLabels);
     })();
+
+    // Hash routing: #home, #projects, #events, #learn, #team, #funds
+    (function() {
+      var hashToTab = {
+        'home': 'whatsnew',
+        'projects': 'tools',
+        'events': 'events',
+        'learn': 'resources',
+        'team': 'team',
+        'funds': 'treasury'
+      };
+      var tabToHash = {
+        'whatsnew': 'home',
+        'tools': 'projects',
+        'events': 'events',
+        'resources': 'learn',
+        'team': 'team',
+        'treasury': 'funds'
+      };
+
+      function activateTabFromHash() {
+        var hash = window.location.hash.slice(1);
+        var tabName = hashToTab[hash];
+        if (!tabName) return;
+        var tab = document.querySelector('.hero-tab[data-tab="' + tabName + '"]');
+        if (tab) tab.click();
+      }
+
+      // Load tab from hash on initial page load
+      activateTabFromHash();
+
+      // Listen for back/forward navigation
+      window.addEventListener('hashchange', activateTabFromHash);
+
+      // Update hash when tab is clicked
+      var tabs = document.querySelectorAll('.hero-tab');
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          var hashName = tabToHash[tab.getAttribute('data-tab')];
+          if (hashName && window.location.hash.slice(1) !== hashName) {
+            window.location.hash = hashName;
+          }
+        });
+      });
+    })();
   </script>
 </body>
 </html>
