@@ -1974,6 +1974,25 @@
       });
     })();
 
+    // Keyboard navigation — left/right arrows to switch tabs
+    (function() {
+      var tabKeys = ['whatsnew', 'tools', 'events', 'resources', 'team', 'treasury'];
+      document.addEventListener('keydown', function(e) {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        // Don't navigate tabs while QR overlay is open
+        var overlay = document.getElementById('qr-overlay');
+        if (overlay && overlay.classList.contains('active')) return;
+        var current = document.querySelector('.hero-tab.active');
+        if (!current) return;
+        var idx = tabKeys.indexOf(current.getAttribute('data-tab'));
+        if (idx === -1) return;
+        if (e.key === 'ArrowRight') idx = (idx + 1) % tabKeys.length;
+        else idx = (idx - 1 + tabKeys.length) % tabKeys.length;
+        var next = document.querySelector('.hero-tab[data-tab="' + tabKeys[idx] + '"]');
+        if (next) next.click();
+      });
+    })();
+
     // QR overlay — click to expand, click/ESC to close
     (function() {
       var trigger = document.querySelector('.qr-footer .qr-wrapper');
