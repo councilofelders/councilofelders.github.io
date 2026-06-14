@@ -221,16 +221,11 @@
       transition: color 0.2s ease;
       white-space: nowrap;
       min-height: 48px;
+      outline: none;
     }
 
     .hero-tab:hover {
       color: var(--color-gray-300);
-    }
-
-    .hero-tab:focus-visible {
-      outline: 2px solid var(--color-primary);
-      outline-offset: -2px;
-      border-radius: 4px;
     }
 
     .hero-tab::after {
@@ -1115,7 +1110,27 @@
 
         <!-- Panel: What's New (default active) -->
         <div class="hero-tab-panel active" role="tabpanel" id="panel-whatsnew" aria-labelledby="tab-whatsnew">
+
+          <!-- Welcome intro card -->
           <div class="hero-featured-content">
+            <div class="hero-text">
+              <span class="hero-badge">Welcome</span>
+              <h2>About this Hub</h2>
+              <p class="featured-description">
+                The Council of Elders is a community-elected group connecting the Numerai team with the wider ecosystem. This hub brings together everything the community creates and shares — from global meetups and open-source tools to educational resources and real-time collaboration. Explore the tabs ↑↑↑ to discover more and get involved.
+              </p>
+            </div>
+            <div class="hero-visual" aria-label="Welcome to the Council of Elders Hub">
+              <img src="assets/img/coe_gta.jpg" alt="Council of Elders Global Technical Alliance" loading="lazy" width="1280" height="720">
+              <div class="hero-visual-overlay"></div>
+            </div>
+          </div>
+
+          <div class="hero-featured-content hero-featured-content--reversed">
+            <div class="hero-visual whatsnew-visual" aria-label="Watch Out of Sample Episode One on YouTube">
+              <img src="https://i1.ytimg.com/vi/pf-N6RF-Ss4/maxresdefault.jpg" alt="Out of Sample Episode One — Autonomous Quant Research with AI Agents" loading="lazy" width="1280" height="720">
+              <div class="hero-visual-overlay"></div>
+            </div>
             <div class="hero-text">
               <span class="hero-badge">Spotlight</span>
               <h2>Out of Sample</h2>
@@ -1126,23 +1141,15 @@
                 Watch on YouTube <span class="arrow" aria-hidden="true">&rarr;</span>
               </a>
             </div>
-            <a href="https://www.youtube.com/watch?v=pf-N6RF-Ss4" class="hero-visual whatsnew-visual" target="_blank" rel="noopener noreferrer" aria-label="Watch Out of Sample Episode One on YouTube">
-              <img src="https://i1.ytimg.com/vi/pf-N6RF-Ss4/maxresdefault.jpg" alt="Out of Sample Episode One — Autonomous Quant Research with AI Agents" loading="lazy" width="1280" height="720">
-              <div class="hero-visual-overlay"></div>
-            </a>
           </div>
 
-          <!-- Join the Discussion card (reversed layout: image left, text right) -->
-          <div class="hero-featured-content hero-featured-content--reversed">
-            <a href="assets/img/join_the_discussion.jpg" class="hero-visual" target="_blank" rel="noopener noreferrer" aria-label="Join the Numerai community discussion">
-              <img src="assets/img/join_the_discussion.jpg" alt="Join the Numerai community discussion" loading="lazy" width="1280" height="720">
-              <div class="hero-visual-overlay"></div>
-            </a>
+          <!-- Join the Discussion card (text left, image right) -->
+          <div class="hero-featured-content">
             <div class="hero-text">
               <span class="hero-badge">Community</span>
               <h2>Join the Discussion</h2>
               <p class="featured-description">
-                Connect with fellow Numerai researchers, builders, and community members. Share strategies, ask questions, and stay up to date with the latest developments — all in real time.
+                Connect with fellow Numerai researchers, builders, and community members from around the world. Whether you are sharing strategies, asking questions, or exploring new ideas, this is the place to engage, collaborate, and learn together. Stay up to date with the latest developments and take part in real-time conversations shaping the ecosystem.
               </p>
               <div class="featured-cta-group">
                 <a href="https://x.com/NumeraiCoE" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="Follow Numerai Council of Elders on X">
@@ -1152,6 +1159,10 @@
                   Join Discord <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="vertical-align: -2px; margin: 0 4px;"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg> <span class="arrow" aria-hidden="true">&rarr;</span>
                 </a>
               </div>
+            </div>
+            <div class="hero-visual" aria-label="Join the Numerai community discussion">
+              <img src="assets/img/join_the_discussion.jpg" alt="Join the Numerai community discussion" loading="lazy" width="1280" height="720">
+              <div class="hero-visual-overlay"></div>
             </div>
           </div>
         </div>
@@ -1793,14 +1804,19 @@
         <div class="hero-tab-panel" role="tabpanel" id="panel-treasury" aria-labelledby="tab-treasury" hidden>
           <div class="hero-featured-content">
             <div class="hero-text">
-              <span class="hero-badge">The CoE Treasury</span>
-              <h2>Our Multi-sig Wallet</h2>
+              <span class="hero-badge">Multi-sig Wallet &amp; LP</span>
+              <h2>The CoE Treasury</h2>
               <p class="featured-description">
-                The Numerai Council of Elders is supported by Numerai, which provides the funds to power community initiatives — from organizing Decentralized AI Days events to building open-source tools and creating educational content. All treasury activity is managed through a Safe multi-sig wallet for full transparency.
+                The Numerai Council of Elders is supported by Numerai, which funds community initiatives such as events, open-source tools, and educational content. Treasury activity is managed through a Safe multi-signature wallet to ensure transparency and shared oversight. We also maintain an NMR/ETH liquidity pool on Uniswap, providing decentralized access to NMR for participants who prefer to use DEXs.
               </p>
-              <a href="https://app.safe.global/home?safe=eth:0xF58B7c28DAF13926329ef0c74FA3f7258f5A9131" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="View Safe Wallet">
-                Safe Wallet <span class="arrow" aria-hidden="true">&rarr;</span>
-              </a>
+              <div class="featured-cta-group">
+                <a href="https://app.safe.global/home?safe=eth:0xF58B7c28DAF13926329ef0c74FA3f7258f5A9131" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="View Safe Wallet">
+                  Safe Wallet <span class="arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <a href="https://app.uniswap.org/explore/pools/ethereum/0xde9207a409e92b8ce53435694f78390358acfd1d8ed710ef55a53aa0daf6c4b0" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="View NMR/ETH Pool on Uniswap">
+                  NMR/ETH Pool on Uniswap <span class="arrow" aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
             </div>
             <div class="hero-visual" aria-label="Funds preview">
               <img src="assets/img/funds.jpg" alt="Council of Elders multi-sig wallet and funds management" loading="lazy">
@@ -1872,28 +1888,35 @@
         });
       });
 
-      tabs.forEach(function(tab, index) {
-        tab.addEventListener('keydown', function(e) {
-          var targetTab;
-          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-            e.preventDefault();
-            targetTab = tabs[(index + 1) % tabs.length];
-          } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-            e.preventDefault();
-            targetTab = tabs[(index - 1 + tabs.length) % tabs.length];
-          } else if (e.key === 'Home') {
-            e.preventDefault();
-            targetTab = tabs[0];
-          } else if (e.key === 'End') {
-            e.preventDefault();
-            targetTab = tabs[tabs.length - 1];
-          }
-          if (targetTab) {
-            targetTab.focus();
-            activateTab(targetTab);
-          }
-        });
+      // Global keyboard nav — works without focusing a tab first
+      document.addEventListener('keydown', function(e) {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' &&
+            e.key !== 'ArrowUp' && e.key !== 'ArrowDown' &&
+            e.key !== 'Home' && e.key !== 'End') return;
+        // Don't navigate tabs while QR overlay is open
+        var overlay = document.getElementById('qr-overlay');
+        if (overlay && overlay.classList.contains('active')) return;
+        e.preventDefault();
+        var allTabs = document.querySelectorAll('.hero-tab');
+        if (!allTabs.length) return;
+        var current = document.querySelector('.hero-tab.active');
+        var idx = current ? Array.prototype.indexOf.call(allTabs, current) : -1;
+        var targetTab;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          targetTab = allTabs[(idx + 1) % allTabs.length];
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          targetTab = allTabs[(idx - 1 + allTabs.length) % allTabs.length];
+        } else if (e.key === 'Home') {
+          targetTab = allTabs[0];
+        } else if (e.key === 'End') {
+          targetTab = allTabs[allTabs.length - 1];
+        }
+        if (targetTab) {
+          targetTab.focus();
+          activateTab(targetTab);
+        }
       });
+
     })();
 
     // Smart tab text-hide on overflow
@@ -1965,25 +1988,6 @@
             window.location.hash = hashName;
           }
         });
-      });
-    })();
-
-    // Keyboard navigation — left/right arrows to switch tabs
-    (function() {
-      var tabKeys = ['whatsnew', 'tools', 'events', 'resources', 'team', 'treasury'];
-      document.addEventListener('keydown', function(e) {
-        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-        // Don't navigate tabs while QR overlay is open
-        var overlay = document.getElementById('qr-overlay');
-        if (overlay && overlay.classList.contains('active')) return;
-        var current = document.querySelector('.hero-tab.active');
-        if (!current) return;
-        var idx = tabKeys.indexOf(current.getAttribute('data-tab'));
-        if (idx === -1) return;
-        if (e.key === 'ArrowRight') idx = (idx + 1) % tabKeys.length;
-        else idx = (idx - 1 + tabKeys.length) % tabKeys.length;
-        var next = document.querySelector('.hero-tab[data-tab="' + tabKeys[idx] + '"]');
-        if (next) next.click();
       });
     })();
 
