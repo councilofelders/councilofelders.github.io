@@ -13,6 +13,18 @@
       padding: 0;
     }
 
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     :root {
       --color-primary: #1867C0;
       --color-primary-hover: #1454A0;
@@ -26,21 +38,14 @@
       --color-gray-500: #6b7280;
       --color-gray-600: #4b5563;
       --color-gray-700: #374151;
-      --color-gray-800: #161617;
       --color-gray-900: #161617;
 
       --cat-whatsnew: #1867C0;
-      --cat-whatsnew-bg: rgba(24, 103, 192, 0.08);
       --cat-events: #48A9A6;
-      --cat-events-bg: rgba(72, 169, 166, 0.08);
       --cat-tools: #9B59B6;
-      --cat-tools-bg: rgba(155, 89, 182, 0.08);
       --cat-resources: #2ECC71;
-      --cat-resources-bg: rgba(46, 204, 113, 0.08);
       --cat-treasury: #E74C3C;
-      --cat-treasury-bg: rgba(231, 76, 60, 0.08);
       --cat-team: #F39C12;
-      --cat-team-bg: rgba(243, 156, 18, 0.08);
 
       --grid-gap: 20px;
       --grid-max-width: 1120px;
@@ -104,56 +109,6 @@
       max-width: 560px;
       margin: 0 auto;
       letter-spacing: 0.01em;
-    }
-
-    /* ===== Social Buttons Row ===== */
-    .social-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .social-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--color-gray-50);
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 9999px;
-      text-decoration: none;
-      transition: background 0.2s ease, border-color 0.2s ease;
-      min-height: 44px;
-      min-width: 44px;
-    }
-
-    .social-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .social-btn:focus-visible {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-
-    .social-btn svg {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-    }
-
-    @media (max-width: 480px) {
-      .social-btn .social-label {
-        display: none;
-      }
-      .social-btn {
-        padding: 10px 14px;
-      }
     }
 
     /* ===== Hero Featured Section ===== */
@@ -374,38 +329,8 @@
     .hero-text .featured-description {
       font-size: clamp(0.9375rem, 1.5vw, 1rem);
       line-height: 1.7;
-      color: var(--color-gray-400);
+      color: var(--color-gray-300);
       margin-bottom: 32px;
-    }
-
-    .hero-text .featured-stats {
-      display: flex;
-      gap: 36px;
-      margin-bottom: 36px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .hero-text .featured-stats--no-border {
-      border-top: none;
-      padding-top: 0;
-    }
-
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .stat-value {
-      font-size: 1.375rem;
-      font-weight: 600;
-      color: var(--color-gray-100);
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-    }
-
-    .stat-label {
-      font-size: 0.75rem;
     }
 
     .featured-cta {
@@ -438,6 +363,10 @@
     .featured-cta:focus-visible {
       outline: 2px solid var(--color-primary);
       outline-offset: 2px;
+    }
+
+    .hero-text .featured-cta {
+      margin-top: 8px;
     }
 
     .cta-group {
@@ -502,7 +431,7 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-      background: var(--color-gray-800);
+      background: var(--color-gray-900);
       aspect-ratio: 16 / 9;
     }
 
@@ -519,100 +448,6 @@
       inset: 0;
       background: linear-gradient(180deg, transparent 65%, rgba(22, 22, 23, 0.5) 100%);
       pointer-events: none;
-    }
-
-    .hero-visual-label {
-      position: absolute;
-      bottom: 14px;
-      left: 14px;
-      font-size: 0.6875rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--color-gray-400);
-      background: rgba(0, 0, 0, 0.4);
-      padding: 5px 10px;
-      border-radius: 4px;
-      backdrop-filter: blur(8px);
-    }
-
-    /* ===== Button List Component (for Tools & Resources tabs) ===== */
-    .button-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .button-list-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      color: var(--color-gray-50);
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 8px;
-      padding: 16px 20px;
-      text-decoration: none;
-      transition: background 0.15s ease, border-color 0.15s ease;
-      min-height: 48px;
-    }
-
-    .button-list-item:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.22);
-    }
-
-    .button-list-item:active {
-      background: rgba(255, 255, 255, 0.14);
-      transform: translateY(1px);
-    }
-
-    .button-list-item:focus-visible {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-
-    .button-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .button-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .button-name {
-      font-size: 0.9375rem;
-      font-weight: 600;
-      color: var(--color-gray-50);
-      letter-spacing: -0.005em;
-    }
-
-    .button-desc {
-      font-size: 0.8125rem;
-      font-weight: 400;
-      color: var(--color-gray-400);
-      line-height: 1.4;
-    }
-
-    .button-arrow {
-      font-size: 0.875rem;
-      opacity: 0.6;
-      transition: transform 0.15s ease, opacity 0.15s ease;
-      flex-shrink: 0;
-    }
-
-    .button-list-item:hover .button-arrow {
-      transform: translateX(3px);
-      opacity: 1;
     }
 
     /* ===== Tools Card Grid Component (Tools tab only) ===== */
@@ -734,7 +569,7 @@
       transform: scale(1.05);
     }
 
-    .team-card-photo a:hover + .team-card-body .team-card-name {
+    .team-card-photo a:hover + .team-card-name {
       color: var(--color-gray-50);
     }
 
@@ -747,35 +582,7 @@
       text-align: center;
     }
 
-    /* Removed: .team-card-body, .team-card-desc, .team-card-links */
     /* Card chrome stripped — photo + name only */
-
-    /* ===== Treasury Placeholder ===== */
-    .treasury-placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 300px;
-      background: var(--color-gray-800);
-    }
-
-    .placeholder-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      color: var(--color-gray-500);
-    }
-
-    .placeholder-icon {
-      font-size: 2.5rem;
-      opacity: 0.4;
-    }
-
-    .placeholder-text {
-      font-size: 0.875rem;
-      letter-spacing: 0.02em;
-    }
 
     /* ===== Footer ===== */
     .site-footer {
@@ -862,7 +669,7 @@
       border-radius: 50%;
       overflow: hidden;
       border: 2px solid rgba(255,255,255,0.12);
-      background: var(--color-gray-800);
+      background: var(--color-gray-900);
       position: relative;
       z-index: 1;
       transition: border-color 0.2s ease, transform 0.2s ease;
@@ -934,7 +741,6 @@
       .aurora-glow { animation: none; }
       .featured-cta .arrow { transition: none; }
       .featured-cta:hover .arrow { transform: none; }
-      .button-list-item:hover .button-arrow { transform: none; }
       .coa-timeline-event { transition: none; }
       .coa-event-photo { transition: none; }
     }
@@ -997,24 +803,9 @@
         padding: 36px 20px 44px;
       }
 
-      .hero-text .featured-stats {
-        flex-wrap: wrap;
-        gap: 20px;
-      }
-
       .hero-header {
         padding: 32px 20px 20px;
       }
-
-      .button-list-item {
-        padding: 14px 16px;
-        gap: 12px;
-      }
-
-      .button-desc {
-        display: none;
-      }
-
       .tools-card-grid {
         grid-template-columns: 1fr;
         gap: 14px;
@@ -1038,9 +829,6 @@
         display: contents;
       }
 
-      .team-card-body {
-        padding: 12px 14px 14px;
-      }
 
       .coa-events-timeline-section {
         padding: 0 20px 44px;
@@ -1092,21 +880,9 @@
       }
     }
 
-    /* Tools panel: intro block on top, cards in 3-column grid below */
-    #panel-tools .hero-featured-content {
-      grid-template-columns: 1fr;
-      gap: 16px;
-      align-items: start;
-    }
-
-    /* Resources panel: same layout as Tools — intro on top, cards in grid below */
-    #panel-resources .hero-featured-content {
-      grid-template-columns: 1fr;
-      gap: 16px;
-      align-items: start;
-    }
-
-    /* Team panel: intro block on top, cards in grid below */
+    /* Tools, Resources, and Team panels: intro block on top, cards in grid below */
+    #panel-tools .hero-featured-content,
+    #panel-resources .hero-featured-content,
     #panel-team .hero-featured-content {
       grid-template-columns: 1fr;
       gap: 16px;
@@ -1223,7 +999,8 @@
         </button>
       </div>
 
-      <div class="hero-tab-panels">
+      <div class="hero-tab-panels" aria-live="polite">
+        <span class="sr-only" id="tab-announcement" aria-live="polite" aria-atomic="true"></span>
 
         <!-- Panel: What's New (default active) -->
         <div class="hero-tab-panel active" role="tabpanel" id="panel-whatsnew" aria-labelledby="tab-whatsnew">
@@ -1239,7 +1016,7 @@
               </a>
             </div>
             <a href="https://www.youtube.com/watch?v=pf-N6RF-Ss4" class="hero-visual whatsnew-visual" target="_blank" rel="noopener noreferrer" aria-label="Watch Out of Sample Episode One on YouTube">
-              <img src="https://i1.ytimg.com/vi/pf-N6RF-Ss4/maxresdefault.jpg" alt="Out of Sample Episode One — Autonomous Quant Research with AI Agents" loading="eager" width="1280" height="720">
+              <img src="https://i1.ytimg.com/vi/pf-N6RF-Ss4/maxresdefault.jpg" alt="Out of Sample Episode One — Autonomous Quant Research with AI Agents" loading="lazy" width="1280" height="720">
               <div class="hero-visual-overlay"></div>
             </a>
           </div>
@@ -1276,15 +1053,23 @@
               <p class="featured-description">
                 What started as local Numerai meetups has grown into a global movement. Our Decentralized AI Days are zero-hype events where the brightest minds connect. The momentum behind AI and Web3 is growing fast — join us to collaborate with top builders and help shape the future of user-owned AI.
               </p>
-              <a href="https://luma.com/decentralized_ai_events" class="featured-cta" style="margin-top: 8px;" aria-label="Subscribe to Our Event Calendar" target="_blank" rel="noopener noreferrer">
+              <a href="https://luma.com/decentralized_ai_events" class="featured-cta" aria-label="Subscribe to Our Event Calendar" target="_blank" rel="noopener noreferrer">
                 Subscribe to Our Event Calendar <span class="arrow" aria-hidden="true">&rarr;</span>
               </a>
             </div>
-            <div class="hero-visual" aria-label="Decentralized AI Days event screenshot">
+            <div class="hero-visual" role="img" aria-label="Decentralized AI Days event screenshot">
               <img src="assets/img/decentralized-ai-days.jpeg" alt="Conference hall with attendees at a Decentralized AI Days event" loading="lazy">
               <div class="hero-visual-overlay"></div>
             </div>
           </div>
+
+          <!-- ===== Hidden SVG sprite for location pin icon ===== -->
+          <svg style="display:none" aria-hidden="true">
+            <symbol id="icon-location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </symbol>
+          </svg>
 
           <!-- ===== v9 circle-photo timeline (15 events) ===== -->
           <div class="coa-events-timeline-section">
@@ -1299,7 +1084,7 @@
               <!-- 15. Decentralized AI Day Tokyo 2026 — May 2026 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/jp.png" alt="Japan flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/jp.png" srcset="https://flagcdn.com/w80/jp.png 80w, https://flagcdn.com/w160/jp.png 160w, https://flagcdn.com/w320/jp.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="Japan flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1307,7 +1092,7 @@
                     <span class="coa-event-date">May 2026</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     727 Spemo Lounge, Minato City
                   </span>
                 </div>
@@ -1316,7 +1101,7 @@
               <!-- 14. Decentralized AI Day Vienna 2026 — Mar 2026 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/at.png" alt="Austria flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/at.png" srcset="https://flagcdn.com/w80/at.png 80w, https://flagcdn.com/w160/at.png 160w, https://flagcdn.com/w320/at.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="Austria flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1324,7 +1109,7 @@
                     <span class="coa-event-date">Mar 2026</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     Impact Hub Vienna
                   </span>
                 </div>
@@ -1333,7 +1118,7 @@
               <!-- 13. Decentralized AI Day San Francisco — Jan 2026 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/us.png" alt="United States flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/us.png" srcset="https://flagcdn.com/w80/us.png 80w, https://flagcdn.com/w160/us.png 160w, https://flagcdn.com/w320/us.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="United States flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1341,7 +1126,7 @@
                     <span class="coa-event-date">Jan 2026</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     Common Space
                   </span>
                 </div>
@@ -1355,7 +1140,7 @@
               <!-- 12. Decentralized AI Day Vienna — Sep 2025 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/at.png" alt="Austria flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/at.png" srcset="https://flagcdn.com/w80/at.png 80w, https://flagcdn.com/w160/at.png 160w, https://flagcdn.com/w320/at.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="Austria flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1363,7 +1148,7 @@
                     <span class="coa-event-date">Sep 2025</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     Impact Hub Vienna
                   </span>
                 </div>
@@ -1372,7 +1157,7 @@
               <!-- 11. Decentralized AI Day Tokyo — May 2025 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/jp.png" alt="Japan flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/jp.png" srcset="https://flagcdn.com/w80/jp.png 80w, https://flagcdn.com/w160/jp.png 160w, https://flagcdn.com/w320/jp.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="Japan flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1380,7 +1165,7 @@
                     <span class="coa-event-date">May 2025</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     SPOT六本木ミッドタウンサイド, Minato City
                   </span>
                 </div>
@@ -1389,7 +1174,7 @@
               <!-- 10. Decentralized AI Day Seattle — Mar 2025 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/us.png" alt="United States flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/us.png" srcset="https://flagcdn.com/w80/us.png 80w, https://flagcdn.com/w160/us.png 160w, https://flagcdn.com/w320/us.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="United States flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1397,7 +1182,7 @@
                     <span class="coa-event-date">Mar 2025</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     Niftmint
                   </span>
                 </div>
@@ -1411,7 +1196,7 @@
               <!-- 9. Numerai CoE Bangkok Meetup — Nov 2024 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/th.png" alt="Thailand flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/th.png" srcset="https://flagcdn.com/w80/th.png 80w, https://flagcdn.com/w160/th.png 160w, https://flagcdn.com/w320/th.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="Thailand flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1419,7 +1204,7 @@
                     <span class="coa-event-date">Nov 2024</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     Renaissance Bangkok Ratchaprasong Hotel
                   </span>
                 </div>
@@ -1428,7 +1213,7 @@
               <!-- 8. Numerai CoE Tokyo Meetup — Jul 2024 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/jp.png" alt="Japan flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/jp.png" srcset="https://flagcdn.com/w80/jp.png 80w, https://flagcdn.com/w160/jp.png 160w, https://flagcdn.com/w320/jp.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="Japan flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1436,7 +1221,7 @@
                     <span class="coa-event-date">Jul 2024</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     C-Lounge, Chiyoda City
                   </span>
                 </div>
@@ -1445,7 +1230,7 @@
               <!-- 7. Numerai CoE Frankfurt Meetup — Apr 2024 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/de.png" alt="Germany flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/de.png" srcset="https://flagcdn.com/w80/de.png 80w, https://flagcdn.com/w160/de.png 160w, https://flagcdn.com/w320/de.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="Germany flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1453,7 +1238,7 @@
                     <span class="coa-event-date">Apr 2024</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     Onlight Studiorent
                   </span>
                 </div>
@@ -1462,7 +1247,7 @@
               <!-- 6. Numerai CoE SF Meetup — Jan 2024 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/us.png" alt="United States flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/us.png" srcset="https://flagcdn.com/w80/us.png 80w, https://flagcdn.com/w160/us.png 160w, https://flagcdn.com/w320/us.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="United States flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1470,7 +1255,7 @@
                     <span class="coa-event-date">Jan 2024</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     Noisebridge
                   </span>
                 </div>
@@ -1484,7 +1269,7 @@
               <!-- 5. Numerai CoE Toronto Meetup — Oct 2023 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/ca.png" alt="Canada flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/ca.png" srcset="https://flagcdn.com/w80/ca.png 80w, https://flagcdn.com/w160/ca.png 160w, https://flagcdn.com/w320/ca.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="Canada flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1492,7 +1277,7 @@
                     <span class="coa-event-date">Oct 2023</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     Startuptive
                   </span>
                 </div>
@@ -1501,7 +1286,7 @@
               <!-- 4. Numerai CoE Prague Meetup — Jul 2023 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/cz.png" alt="Czech Republic flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/cz.png" srcset="https://flagcdn.com/w80/cz.png 80w, https://flagcdn.com/w160/cz.png 160w, https://flagcdn.com/w320/cz.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="Czech Republic flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1509,7 +1294,7 @@
                     <span class="coa-event-date">Jul 2023</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     Paralelní Polis
                   </span>
                 </div>
@@ -1518,7 +1303,7 @@
               <!-- 3. Numerai CoE Tokyo Meetup — Apr 2023 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/jp.png" alt="Japan flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/jp.png" srcset="https://flagcdn.com/w80/jp.png 80w, https://flagcdn.com/w160/jp.png 160w, https://flagcdn.com/w320/jp.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="Japan flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1526,7 +1311,7 @@
                     <span class="coa-event-date">Apr 2023</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     Space Market, Shibuya City
                   </span>
                 </div>
@@ -1540,7 +1325,7 @@
               <!-- 2. Numerai CoE NYC Meetup — Sep 2022 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/us.png" alt="United States flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/us.png" srcset="https://flagcdn.com/w80/us.png 80w, https://flagcdn.com/w160/us.png 160w, https://flagcdn.com/w320/us.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="United States flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1548,7 +1333,7 @@
                     <span class="coa-event-date">Sep 2022</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     NYC Seminar and Conference Center
                   </span>
                 </div>
@@ -1557,7 +1342,7 @@
               <!-- 1. Numerai CoE London Meetup — Jul 2022 -->
               <div class="coa-timeline-event" role="listitem">
                 <div class="coa-event-photo">
-                  <img src="https://flagcdn.com/w320/gb.png" alt="United Kingdom flag" loading="lazy">
+                  <img src="https://flagcdn.com/w160/gb.png" srcset="https://flagcdn.com/w80/gb.png 80w, https://flagcdn.com/w160/gb.png 160w, https://flagcdn.com/w320/gb.png 320w" sizes="(max-width: 767px) 58px, 90px" alt="United Kingdom flag" loading="lazy">
                 </div>
                 <div class="coa-event-details">
                   <div class="coa-event-header">
@@ -1565,7 +1350,7 @@
                     <span class="coa-event-date">Jul 2022</span>
                   </div>
                   <span class="coa-event-location">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#icon-location"/></svg>
                     The Microsoft Reactor
                   </span>
                 </div>
@@ -1814,9 +1599,7 @@
                 <div class="team-card-photo">
                   <a href="https://numer.ai/~aventurine" target="_blank" rel="noopener noreferrer"><img src="assets/img/elders/aventurine.jpg" alt="Portrait of aventurine" loading="lazy" width="400" height="400"></a>
                 </div>
-                <div class="team-card-body">
-                  <div class="team-card-name">aventurine</div>
-                </div>
+                <div class="team-card-name">aventurine</div>
               </div>
 
               <!-- Elder 2: correlator -->
@@ -1824,9 +1607,7 @@
                 <div class="team-card-photo">
                   <a href="https://crypto.numer.ai/~correlator" target="_blank" rel="noopener noreferrer"><img src="assets/img/elders/correlator.png" alt="Portrait of correlator" loading="lazy" width="400" height="400"></a>
                 </div>
-                <div class="team-card-body">
-                  <div class="team-card-name">correlator</div>
-                </div>
+                <div class="team-card-name">correlator</div>
               </div>
 
               <!-- Elder 3: ia_ai -->
@@ -1834,9 +1615,7 @@
                 <div class="team-card-photo">
                   <a href="https://crypto.numer.ai/~ia_ai" target="_blank" rel="noopener noreferrer"><img src="assets/img/elders/ia_ai.jpg" alt="Portrait of ia_ai" loading="lazy" width="400" height="400"></a>
                 </div>
-                <div class="team-card-body">
-                  <div class="team-card-name">ia_ai</div>
-                </div>
+                <div class="team-card-name">ia_ai</div>
               </div>
 
               <!-- Elder 4: jefferythewind -->
@@ -1844,9 +1623,7 @@
                 <div class="team-card-photo">
                   <a href="https://numer.ai/~jefferythewind" target="_blank" rel="noopener noreferrer"><img src="assets/img/elders/jefferythewind.jpg" alt="Portrait of jefferythewind" loading="lazy" width="400" height="400"></a>
                 </div>
-                <div class="team-card-body">
-                  <div class="team-card-name">jefferythewind</div>
-                </div>
+                <div class="team-card-name">jefferythewind</div>
               </div>
 
               <!-- Elder 5: jrb -->
@@ -1854,9 +1631,7 @@
                 <div class="team-card-photo">
                   <a href="https://numer.ai/~jrb" target="_blank" rel="noopener noreferrer"><img src="assets/img/elders/jrb.jpg" alt="Portrait of jrb" loading="lazy" width="400" height="400"></a>
                 </div>
-                <div class="team-card-body">
-                  <div class="team-card-name">jrb</div>
-                </div>
+                <div class="team-card-name">jrb</div>
               </div>
 
               </div><!-- /.team-row row-1 -->
@@ -1869,9 +1644,7 @@
                 <div class="team-card-photo">
                   <a href="https://numer.ai/~numerologist" target="_blank" rel="noopener noreferrer"><img src="assets/img/elders/numerologist.jpg" alt="Portrait of numerologist" loading="lazy" width="400" height="400"></a>
                 </div>
-                <div class="team-card-body">
-                  <div class="team-card-name">numerologist</div>
-                </div>
+                <div class="team-card-name">numerologist</div>
               </div>
 
               <!-- Elder 7: shatteredx -->
@@ -1879,9 +1652,7 @@
                 <div class="team-card-photo">
                   <a href="https://numer.ai/~shatteredx" target="_blank" rel="noopener noreferrer"><img src="assets/img/elders/shatteredx.jpg" alt="Portrait of shatteredx" loading="lazy" width="400" height="400"></a>
                 </div>
-                <div class="team-card-body">
-                  <div class="team-card-name">shatteredx</div>
-                </div>
+                <div class="team-card-name">shatteredx</div>
               </div>
 
               <!-- Elder 8: uuazed -->
@@ -1889,9 +1660,7 @@
                 <div class="team-card-photo">
                   <a href="https://numer.ai/~uuazed" target="_blank" rel="noopener noreferrer"><img src="assets/img/elders/uuazed.jpg" alt="Portrait of uuazed" loading="lazy" width="400" height="400"></a>
                 </div>
-                <div class="team-card-body">
-                  <div class="team-card-name">uuazed</div>
-                </div>
+                <div class="team-card-name">uuazed</div>
               </div>
 
               <!-- Elder 9: wigglemuse -->
@@ -1899,17 +1668,13 @@
                 <div class="team-card-photo">
                   <a href="https://numer.ai/~wigglemuse" target="_blank" rel="noopener noreferrer"><img src="assets/img/elders/wigglemuse.jpg" alt="Portrait of wigglemuse" loading="lazy" width="400" height="400"></a>
                 </div>
-                <div class="team-card-body">
-                  <div class="team-card-name">wigglemuse</div>
-                </div>
+                <div class="team-card-name">wigglemuse</div>
               </div>
 
               </div><!-- /.team-row row-2 -->
 
             </div>
-            <div class="featured-cta-secondary">
-              <a href="https://forum.numer.ai/t/elder-nominations-open-until-april-27-midnight-utc/8265/33" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="View Our Manifesto">View Our Manifestos <span class="arrow" aria-hidden="true">&rarr;</span></a>
-            </div>
+            <a href="https://forum.numer.ai/t/elder-nominations-open-until-april-27-midnight-utc/8265/33" class="featured-cta" target="_blank" rel="noopener noreferrer" aria-label="View Our Manifesto">View Our Manifestos <span class="arrow" aria-hidden="true">&rarr;</span></a>
           </div>
         </div>
 
@@ -1968,6 +1733,11 @@
         if (panel) {
           panel.classList.add('active');
           panel.hidden = false;
+          var announcer = document.getElementById('tab-announcement');
+          if (announcer) {
+            var label = tab.textContent.trim() || tab.getAttribute('aria-label') || '';
+            announcer.textContent = label + ' tab selected';
+          }
         }
       }
 
