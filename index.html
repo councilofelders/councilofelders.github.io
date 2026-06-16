@@ -1507,45 +1507,6 @@
       color: var(--color-gray-500);
     }
 
-    /* FAB — floating action button for mobile */
-    .search-fab {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1500;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--color-primary);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-    .search-fab:active {
-      transform: scale(0.92);
-    }
-    .search-fab[hidden] {
-      display: none !important;
-    }
-    .search-fab svg {
-      width: 24px;
-      height: 24px;
-      fill: none;
-      stroke: #fff;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-    @media (min-width: 769px) {
-      .search-fab {
-        display: none !important;
-      }
-    }
-
     .search-palette__no-results {
       padding: 24px 20px;
       text-align: center;
@@ -1672,7 +1633,7 @@
                 <line x1="16.5" y1="16.5" x2="21" y2="21"/>
               </svg>
             </span>
-            <input type="search" placeholder="Search events, tools, meetups..." aria-label="Search events, tools, meetups" autocomplete="off" autocorrect="off" spellcheck="false">
+            <input type="search" placeholder="Search projects, events, team&hellip;" aria-label="Search projects, events, team" autocomplete="off" autocorrect="off" spellcheck="false">
             <div class="hero-search-actions">
               <span class="hero-search-kbd" aria-hidden="true">&#8984;K</span>
             </div>
@@ -5680,15 +5641,7 @@
     </div>
   </div>
 
-  <!-- FAB — floating action button for touch devices -->
-  <button id="search-fab" class="search-fab" type="button" aria-label="Open search" hidden>
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="11" cy="11" r="7.5"/>
-      <line x1="16.5" y1="16.5" x2="21" y2="21"/>
-    </svg>
-  </button>
-
-  <!-- Search palette JS -->
+  <!-- Cmd+K Search Palette -->
   <script>
     (function() {
       'use strict';
@@ -5700,7 +5653,6 @@
       var resultsEl = document.getElementById('search-palette-results');
       var countEl = document.getElementById('search-palette-count');
       var hintEl = document.getElementById('search-palette-hint');
-      var fab = document.getElementById('search-fab');
 
       var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
       var activeIndex = -1;
@@ -5741,12 +5693,7 @@
       // Touch handling
       if (isTouch) {
         if (hintEl) hintEl.hidden = true;
-        if (fab) {
-          fab.removeAttribute('hidden');
-          input.placeholder = 'Search the site\u2026';
-        }
-      } else {
-        if (fab) fab.hidden = true;
+        input.placeholder = 'Search the site\u2026';
       }
 
       function openPalette() {
@@ -6066,10 +6013,6 @@
         }
       }, true);
 
-      fab.addEventListener('click', function() {
-        openPalette();
-      });
-
       var heroSearchInput = document.querySelector('.hero-search input');
       var heroResultsEl = document.getElementById('hero-search-results');
       var heroActiveIndex = -1;
@@ -6254,7 +6197,6 @@
 
       if (isTouch) {
         if (hintEl) hintEl.hidden = true;
-        if (fab) fab.removeAttribute('hidden');
       }
     })();
   </script>
