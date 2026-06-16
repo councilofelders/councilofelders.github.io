@@ -6,6 +6,9 @@ package-lock.json
 # Internal docs
 docs/
 
+# Ensemble results
+ensemble-results/
+
 # OS files
 .DS_Store
 Thumbs.db

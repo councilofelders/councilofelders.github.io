@@ -93,11 +93,12 @@ def _city_slug(city: str) -> str:
     parts = city.split()
     # Filter out generic words
     generic = {"decentralized", "ai", "day", "meetup", "community", "numerai", "@", "superintelligence", "summit"}
-    meaningful = [p for p in parts if p.lower() not in generic]
+    meaningful = [re.sub(r'[^a-zA-Z0-9]', '', p).lower() for p in parts if p.lower() not in generic]
+    meaningful = [p for p in meaningful if p]
     if meaningful:
-        slug = "-".join(meaningful).lower()
+        slug = "-".join(meaningful)
     else:
-        slug = "-".join(parts).lower()
+        slug = "-".join(re.sub(r'[^a-zA-Z0-9]', '', p).lower() for p in parts if re.sub(r'[^a-zA-Z0-9]', '', p).lower())
     return slug
 
 
@@ -160,7 +161,9 @@ def parse_meetup_entries(readme_text: str) -> list[dict]:
 
         event_num = int(header_match.group(1))
         event_date = header_match.group(2)
-        city = header_match.group(3).strip()
+        raw_city = header_match.group(3).strip()
+        # Take only the first segment before any " - " (extra description)
+        city = raw_city.split(" - ")[0].strip()
         event_name = EVENT_NAMES.get(event_num, f"Meetup #{event_num} — {city}")
 
         lines = section.split("\n")
@@ -202,16 +205,21 @@ def parse_meetup_entries(readme_text: str) -> list[dict]:
             talk_idx += 1
 
             # ---- Determine title ----
+            # Get text after bold marker and find link boundary
+            after_bold = line[title_match.end():]
+            link_boundary = re.search(r'\s*[-–—]\s*\[\*\*', after_bold)
+            before_links = after_bold[:link_boundary.start()] if link_boundary else after_bold
+
             # Check if bold text is a talk-number prefix
-            talk_num_match = re.match(r'^(Talk\s*#?\d+[a-z]?|Bonus Talk)$', raw_title)
+            talk_num_match = re.match(r'^(Talk\s*#?\d+(?:\.\d+)*[a-z]?|Bonus Talk)$', raw_title)
             if talk_num_match:
                 # Real title follows the bold: "**Talk #N** - Actual Title by Speaker"
-                after_bold = line[title_match.end():]
-                title_extract = re.search(
-                    r'^\s*[-–—]+\s*(.+?)\s+by\s+', after_bold
-                )
-                if title_extract:
-                    title = title_extract.group(1).strip()
+                # Find the LAST "by" before the link boundary
+                last_by_pos = before_links.rfind(' by ')
+                if last_by_pos >= 0:
+                    title = before_links[:last_by_pos].strip()
+                    # Strip leading dash
+                    title = re.sub(r'^[-–—]\s*', '', title).strip()
                 else:
                     title = raw_title
             else:
@@ -222,17 +230,14 @@ def parse_meetup_entries(readme_text: str) -> list[dict]:
             is_contact_speaker = bool(re.search(r"\*\*Contact Speaker\*\*", line))
 
             # ---- Extract speaker ----
+            # Speaker is after the last "by" before the first link
             speaker = ""
-            speaker_match = re.search(r"\bby\s+(.+?)(?:\s*[-–—]\s*(?:\[\*\*|$))", line)
-            if speaker_match:
-                speaker = speaker_match.group(1).strip()
-            else:
-                # Fallback: everything after "by" before a markdown link or end
-                speaker_match2 = re.search(r"\bby\s+(.+?)(?:\s*\[\*\*|\s*\[|$)", line)
-                if speaker_match2:
-                    speaker = speaker_match2.group(1).strip()
-            # Clean up speaker
-            speaker = re.sub(r"\s+@\s+.*", "", speaker).strip()
+            last_by_pos = before_links.rfind(' by ')
+            if last_by_pos >= 0:
+                speaker = before_links[last_by_pos + 4:].strip()
+            # Clean up speaker: remove trailing @org, trailing parentheticals
+            speaker = re.sub(r'\s+@\s+.*', '', speaker).strip()
+            speaker = re.sub(r'\s*\(.*?\)\s*$', '', speaker).strip()
 
             # ---- Build slides / videos maps ----
             slides: dict = {}
@@ -353,6 +358,24 @@ def main():
     # 3. Parse meetup entries
     meetup_entries = parse_meetup_entries(readme)
     print(f"Parsed {len(meetup_entries)} meetup talk entries from README.")
+
+    # 3b. Health check: remove duplicate entries by id
+    seen_ids = set()
+    deduped = []
+    dup_count = 0
+    for entry in meetup_entries:
+        eid = entry.get("id", "")
+        if eid in seen_ids:
+            dup_count += 1
+            print(f"  Removing duplicate: {eid} ({entry.get('title', '')})")
+        else:
+            seen_ids.add(eid)
+            deduped.append(entry)
+    if dup_count:
+        print(f"Removed {dup_count} duplicate entries.")
+    else:
+        print("No duplicate entries found.")
+    meetup_entries = deduped
 
     # 4. Merge: page entries first, then meetup entries (sorted by id)
     meetup_entries.sort(key=lambda e: e["id"])
