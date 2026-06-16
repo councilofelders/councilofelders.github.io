@@ -88,7 +88,6 @@
 
     /* ===== Hero Header ===== */
     .hero-header {
-      text-align: center;
       padding: 24px 48px 32px;
     }
 
@@ -112,75 +111,286 @@
     .hero-header .hero-subtitle {
       font-size: clamp(0.875rem, 1.5vw, 1rem);
       color: var(--color-gray-400);
-      max-width: 560px;
-      margin: 0 auto;
+      margin-top: 10px;
       letter-spacing: 0.01em;
+      text-align: left;
     }
-    /* Override width/centering for optE subtitle so inline content doesn't wrap awkwardly */
-    .hero-header .optE-subtitle {
+
+    /* ===== Hero Title Wrapper ===== */
+    .hero-title-wrapper {
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ===== Search Bar ===== */
+    .hero-search-wrapper {
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .hero-search {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 48px;
+      padding: 0 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 40px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-sizing: border-box;
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      cursor: text;
+    }
+
+    .hero-search:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-search:focus-within {
+      border-color: rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.09);
+      box-shadow: 0 0 0 3px rgba(24, 103, 192, 0.25), 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .search-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      color: var(--color-gray-500);
+      margin-right: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 0 6px;
-      max-width: none;
-      margin: 0;
     }
-    .optE-dot {
-      color: var(--color-gray-500);
-      margin: 0 0.5em;
-    }
-    .optE-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      color: var(--color-gray-400);
-      text-decoration: none;
-      font: inherit;
-      font-size: inherit;
-      cursor: pointer;
-      padding: 0;
-      border-radius: 0;
-      transition: color 0.15s ease;
-    }
-    .optE-link:hover,
-    .optE-link:focus-visible {
-      color: var(--color-gray-200);
-    }
-    .optE-link:focus-visible {
-      box-shadow: 0 0 0 2px rgba(186, 230, 253, 0.45);
-    }
-    .optE-mag-icon {
-      width: 13px;
-      height: 13px;
-      flex-shrink: 0;
+
+    .search-icon svg {
+      width: 18px;
+      height: 18px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
-    .optE-keycap {
-      display: inline-flex;
+
+    .hero-search input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 0.9375rem;
+      font-family: inherit;
+      color: var(--color-gray-100);
+      line-height: 1;
+      cursor: text;
+    }
+
+    .hero-search input::placeholder {
+      color: var(--color-gray-500);
+      opacity: 1;
+    }
+
+    .search-actions {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 8px;
+    }
+
+    /* ===== Hero Search Right Actions ===== */
+    .hero-search-actions {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
+    }
+
+    .hero-search-kbd {
+      display: flex;
       align-items: center;
       justify-content: center;
-      min-width: 22px;
-      height: 16px;
-      padding: 0 4px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 4px;
-      font-size: 0.625rem;
-      line-height: 1;
-      color: var(--color-gray-400, #9ca3af);
+      min-width: 30px;
+      height: 22px;
+      padding: 0 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--color-gray-400);
+      letter-spacing: 0.02em;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
-    /* Mobile: hide the text label, keep icon + keycap, grow touch target */
-    @media (max-width: 480px) {
-      .optE-text {
-        display: none;
+
+    /* ===== Hero Search Results Dropdown ===== */
+    .hero-search-wrapper {
+      position: relative;
+    }
+
+    .hero-search-results {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: rgba(28, 28, 30, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 12px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+      max-height: 380px;
+      overflow-y: auto;
+      z-index: 100;
+      padding: 6px 0;
+    }
+
+    .hero-search-results[hidden] {
+      display: none !important;
+    }
+
+    .hero-result {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 14px;
+      background: transparent;
+      border: none;
+      color: var(--color-gray-100);
+      font-family: inherit;
+      font-size: 0.875rem;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.12s ease;
+    }
+
+    .hero-result:hover,
+    .hero-result[aria-selected="true"] {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-result:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: -2px;
+    }
+
+    .hero-result-badge {
+      flex-shrink: 0;
+      display: inline-block;
+      font-size: 0.625rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: transparent;
+      border: 1px solid currentColor;
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    .hero-result-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .hero-result-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-gray-100);
+      line-height: 1.3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .hero-result-subtitle {
+      font-size: 0.75rem;
+      color: var(--color-gray-500);
+      margin-top: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .hero-result-highlight {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .hero-results-none {
+      padding: 16px 14px;
+      font-size: 0.8125rem;
+      color: var(--color-gray-500);
+      text-align: center;
+    }
+
+    .hero-results-loading {
+      padding: 16px 14px;
+      font-size: 0.8125rem;
+      color: var(--color-gray-500);
+      text-align: center;
+    }
+
+    .hero-result-assets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .hero-result-assets .asset-badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.15s ease;
+      cursor: pointer;
+    }
+
+    .hero-result-assets .asset-badge-pdf {
+      border: 1px solid rgba(163, 206, 241, 0.4);
+      color: #A3CEF1;
+    }
+
+    .hero-result-assets .asset-badge-pdf:hover {
+      background: rgba(163, 206, 241, 0.1);
+    }
+
+    .hero-result-assets .asset-badge-video {
+      border: 1px solid rgba(139, 140, 137, 0.4);
+      color: #8B8C89;
+    }
+
+    .hero-result-assets .asset-badge-video:hover {
+      background: rgba(139, 140, 137, 0.1);
+    }
+
+    .hero-result-assets .asset-badge-na {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--color-gray-500);
+      cursor: default;
+      font-style: italic;
+    }
+
+    @media (max-width: 767px) {
+      .hero-search {
+        height: 44px;
+        padding: 0 12px;
       }
-      .optE-link {
-        padding: 14px 6px;
+      .hero-search input {
+        font-size: 0.875rem;
+      }
+      .hero-search-kbd {
+        display: none;
       }
     }
 
@@ -1458,20 +1668,25 @@
     <!-- Hero Header -->
     <div class="hero-header">
       <img class="hero-logo" src="assets/img/coe_logo.png" alt="Numerai Council of Elders" width="160" height="160">
-      <h1 id="page-heading">Numerai Council of Elders Hub</h1>
-      <p class="hero-subtitle optE-subtitle">
-        A Curated Home for Community Initiatives
-        <span class="optE-dot" aria-hidden="true">&middot;</span>
-        <a href="#" class="optE-link" role="button" aria-label="Search (Ctrl+K or Cmd+K)">
-          <svg class="optE-mag-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="11" cy="11" r="7.5"/>
-            <line x1="16.5" y1="16.5" x2="21" y2="21"/>
-          </svg>
-          <span class="optE-text">Search</span>
-          <span class="optE-keycap" aria-hidden="true">&#x2318;K</span>
-        </a>
-      </p>
+      <div class="hero-title-wrapper">
+        <h1 id="page-heading">Numerai Council of Elders Hub</h1>
 
+        <div class="hero-search-wrapper">
+          <div class="hero-search" role="search">
+            <span class="search-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7.5"/>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+              </svg>
+            </span>
+            <input type="search" placeholder="Search events, tools, meetups..." aria-label="Search events, tools, meetups" autocomplete="off" autocorrect="off" spellcheck="false">
+            <div class="hero-search-actions">
+              <span class="hero-search-kbd" aria-hidden="true">&#8984;K</span>
+            </div>
+          </div>
+          <div class="hero-search-results" id="hero-search-results" role="listbox" aria-live="polite" hidden></div>
+        </div>
+      </div>
     </div>
 
     <!-- Featured Hero with Tabs -->
@@ -2720,6 +2935,12 @@
               if (!palette.hidden) {
                 renderResults(input.value);
               }
+              // ALSO re-render hero dropdown if visible
+              if (heroResultsEl && !heroResultsEl.hidden) {
+                if (heroSearchInput && heroSearchInput.value.trim()) {
+                  renderHeroResults(heroSearchInput.value);
+                }
+              }
             } catch (e) {
               // Graceful fallback: just search on-page
             }
@@ -2927,12 +3148,191 @@
         openPalette();
       });
 
-      var optE = document.querySelector('.optE-link');
-      if (optE) {
-        optE.addEventListener('click', function(e) {
-          e.preventDefault();
-          openPalette();
+      var heroSearchInput = document.querySelector('.hero-search input');
+      var heroResultsEl = document.getElementById('hero-search-results');
+      var heroActiveIndex = -1;
+
+      // Hoisted so loadCrossSourceIndex callback can call them
+      var renderHeroResults, closeHeroResults;
+
+      if (heroSearchInput && heroResultsEl) {
+        var heroResultRows = [];
+        var HERO_CAP = 8;
+
+        // Close dropdown on escape / blur
+        closeHeroResults = function() {
+          heroResultsEl.hidden = true;
+          heroActiveIndex = -1;
+          heroResultRows = [];
+        };
+
+        renderHeroResults = function(query) {
+          var q = query.toLowerCase().trim();
+
+          // Search on-page index (substring match)
+          var matches;
+          if (q === '') {
+            matches = [];
+          } else {
+            matches = searchIndex.filter(function(entry) {
+              return (entry.title + ' ' + entry.subtitle + ' ' + entry.snippet).toLowerCase().indexOf(q) !== -1;
+            });
+          }
+
+          // Search cross-source via Lunr (if loaded)
+          var meetupMatches = [];
+          if (crossSourceLoaded && lunrIndex && q !== '') {
+            try {
+              var results = lunrIndex.search(q);
+              for (var i = 0; i < results.length; i++) {
+                var doc = window.__lunrDocs[results[i].ref];
+                if (doc && meetupMatches.length < HERO_CAP) {
+                  meetupMatches.push(doc);
+                }
+              }
+            } catch (e) {}
+          }
+
+          // Combine: on-page first (up to cap), then meetup results
+          var combined = [];
+          var seen = {};
+          for (var i = 0; i < matches.length && combined.length < HERO_CAP; i++) {
+            if (!seen[matches[i].id]) {
+              combined.push({ type: 'page', tab: matches[i].tab, title: matches[i].title, subtitle: matches[i].subtitle || '', snippet: matches[i].snippet || '', url: matches[i].url || '', badge: matches[i].type || matches[i].tab });
+              seen[matches[i].id] = true;
+            }
+          }
+          for (var i = 0; i < meetupMatches.length && combined.length < HERO_CAP; i++) {
+            if (!seen[meetupMatches[i].id]) {
+              var doc = meetupMatches[i];
+              var subParts = [];
+              if (doc.speaker) subParts.push(doc.speaker);
+              if (doc.event) subParts.push(doc.event);
+              if (doc.eventDate) subParts.push(formatDate(doc.eventDate));
+              combined.push({
+                type: 'meetup', tab: 'resources',
+                title: doc.title,
+                subtitle: subParts.join(' \u00b7 '),
+                url: doc.primaryUrl || '',
+                badge: 'talk',
+                doc: doc
+              });
+              seen[doc.id] = true;
+            }
+          }
+
+          if (combined.length === 0) {
+            heroResultsEl.innerHTML = '<div class="hero-results-none">No results for "' + escapeHtml(query) + '"</div>';
+          } else {
+            var html = '';
+            for (var i = 0; i < combined.length; i++) {
+              var item = combined[i];
+              var badgeColor = typeColors[item.badge] || typeColors[item.tab] || 'var(--color-gray-500)';
+              html += '<div class="hero-result" data-url="' + escapeHtml(item.url) + '">'
+                + '<span class="hero-result-badge" style="color:' + badgeColor + ';border-color:' + badgeColor + ';">' + escapeHtml(item.badge) + '</span>'
+                + '<div class="hero-result-text">'
+                + '<div class="hero-result-title">' + escapeHtml(item.title) + '</div>'
+                + (item.subtitle ? '<div class="hero-result-subtitle">' + escapeHtml(item.subtitle) + '</div>' : '')
+                + (item.doc ? '<div class="hero-result-assets">' + renderAssets(item.doc) + '</div>' : '')
+                + '</div>'
+                + '</div>';
+            }
+            heroResultsEl.innerHTML = html;
+          }
+
+          heroResultRows = heroResultsEl.querySelectorAll('.hero-result');
+          heroActiveIndex = -1;
+          heroResultsEl.hidden = false;
+
+          if (heroResultRows.length > 0) {
+            heroResultRows[0].setAttribute('aria-selected', 'true');
+            heroActiveIndex = 0;
+          }
+        }
+
+        // Live search as user types
+        heroSearchInput.addEventListener('input', function() {
+          var q = this.value.trim();
+          if (q.length === 0) {
+            closeHeroResults();
+            return;
+          }
+          // Lazy-load cross-source index on first search
+          if (!crossSourceLoaded) {
+            loadCrossSourceIndex();
+          }
+          renderHeroResults(q);
         });
+
+        // Keyboard nav
+        heroSearchInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            closeHeroResults();
+            this.blur();
+            return;
+          }
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (heroResultRows.length > 0) {
+              if (heroActiveIndex >= 0) heroResultRows[heroActiveIndex].removeAttribute('aria-selected');
+              heroActiveIndex = Math.min(heroActiveIndex + 1, heroResultRows.length - 1);
+              heroResultRows[heroActiveIndex].setAttribute('aria-selected', 'true');
+              heroResultRows[heroActiveIndex].scrollIntoView({ block: 'nearest' });
+            }
+            return;
+          }
+          if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (heroResultRows.length > 0) {
+              if (heroActiveIndex >= 0) heroResultRows[heroActiveIndex].removeAttribute('aria-selected');
+              heroActiveIndex = Math.max(heroActiveIndex - 1, 0);
+              heroResultRows[heroActiveIndex].setAttribute('aria-selected', 'true');
+              heroResultRows[heroActiveIndex].scrollIntoView({ block: 'nearest' });
+            }
+            return;
+          }
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            if (heroActiveIndex >= 0 && heroActiveIndex < heroResultRows.length) {
+              var el = heroResultRows[heroActiveIndex];
+              var url = el.getAttribute('data-url');
+              if (url) {
+                closeHeroResults();
+                navigateTo(url);
+              }
+            }
+            return;
+          }
+        });
+
+        // Click to navigate (but let asset badges open natively)
+        heroResultsEl.addEventListener('click', function(e) {
+          if (e.target.closest('.asset-badge')) return;
+          var el = e.target.closest('.hero-result');
+          if (el) {
+            var url = el.getAttribute('data-url');
+            if (url) {
+              closeHeroResults();
+              navigateTo(url);
+            }
+          }
+        });
+
+        // Close on blur (click outside)
+        document.addEventListener('click', function(e) {
+          if (heroResultsEl.hidden) return;
+          var wrapper = document.querySelector('.hero-search-wrapper');
+          if (wrapper && !wrapper.contains(e.target)) {
+            closeHeroResults();
+          }
+        });
+
+        // Close on palette open
+        var _origOpenPalette = openPalette;
+        openPalette = function() {
+          closeHeroResults();
+          _origOpenPalette();
+        };
       }
 
       if (isTouch) {
