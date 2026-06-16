@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Numerai CoE Hub</title>
   <link rel="icon" type="image/png" href="assets/img/coe_logo.png">
+  <!-- FOUC-prevention: set data-theme before CSS paints -->
+  <script>
+    (function() {
+      var saved = localStorage.getItem('coe-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <style>
     /* ===== Reset & Base ===== */
     *, *::before, *::after {
@@ -65,6 +74,162 @@
       --glass-blur: 12px;
     }
 
+    /* ===== Light Theme Override ===== */
+    [data-theme="light"] {
+      --color-primary: #0D6EFD;
+      --color-primary-hover: #0B5ED7;
+      --color-primary-active: #0A58CA;
+
+      --color-gray-50: #212529;
+      --color-gray-100: #343A40;
+      --color-gray-200: #495057;
+      --color-gray-300: #ADB5BD;
+      --color-gray-400: #6C757D;
+      --color-gray-500: #6C757D;
+      --color-gray-600: #CED4DA;
+      --color-gray-700: #DEE2E6;
+      --color-gray-900: #F8F9FA;
+
+      --cat-whatsnew: #0D6EFD;
+      --cat-events: #00897B;
+      --cat-tools: #7B1FA2;
+      --cat-resources: #198754;
+      --cat-treasury: #C62828;
+      --cat-team: #E65100;
+
+      --card-bg: #FFFFFF;
+      --card-border: #DEE2E6;
+      --card-border-hover: #C8CDD3;
+
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(0, 0, 0, 0.06);
+      --glass-border-hover: rgba(0, 0, 0, 0.12);
+      --glass-blur: 8px;
+    }
+
+    /* Light theme body */
+    [data-theme="light"] body {
+      background: var(--color-gray-900);
+      color: #212529;
+    }
+
+    /* Light theme — hardcoded color overrides */
+    [data-theme="light"] .hero-search {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.10);
+    }
+    [data-theme="light"] .hero-search:hover {
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.18);
+    }
+    [data-theme="light"] .hero-search:focus-within {
+      background: #FFFFFF;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.20), 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="light"] .hero-search-results {
+      background: #FFFFFF;
+      border-color: var(--color-gray-700);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.10);
+    }
+
+    [data-theme="light"] .hero-result {
+      color: var(--color-gray-100);
+    }
+    [data-theme="light"] .hero-result:hover,
+    [data-theme="light"] .hero-result[aria-selected="true"] {
+      background: rgba(0, 0, 0, 0.04);
+    }
+    [data-theme="light"] .hero-result-title {
+      color: var(--color-gray-100);
+    }
+    [data-theme="light"] .hero-result-subtitle {
+      color: var(--color-gray-400);
+    }
+    [data-theme="light"] .hero-result-assets .asset-badge-pdf {
+      border-color: rgba(13, 110, 253, 0.3);
+    }
+    [data-theme="light"] .hero-result-assets .asset-badge-na {
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="light"] .hero-background {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    [data-theme="light"] .hero-background::before {
+      background:
+        radial-gradient(ellipse 120% 80% at 15% 20%, rgba(24, 103, 192, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 90% at 85% 80%, rgba(0, 137, 123, 0.10) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(24, 103, 192, 0.06) 0%, transparent 50%);
+    }
+    [data-theme="light"] .hero-background::after {
+      background:
+        radial-gradient(ellipse 60% 40% at 25% 35%, rgba(24, 103, 192, 0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 35% at 70% 55%, rgba(0, 137, 123, 0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 50% 30%, rgba(24, 103, 192, 0.05) 0%, transparent 70%);
+    }
+    [data-theme="light"] .aurora-glow {
+      background:
+        radial-gradient(ellipse 35% 25% at 20% 40%, rgba(24, 103, 192, 0.05) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 20% at 75% 45%, rgba(0, 137, 123, 0.08) 0%, transparent 70%);
+    }
+
+    [data-theme="light"] .hero-tab-bar {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(0, 0, 0, 0.015);
+    }
+    [data-theme="light"] .hero-tab:hover {
+      color: var(--color-gray-200);
+    }
+
+    [data-theme="light"] .hero-text .featured-description {
+      color: #6C757D;
+    }
+
+    [data-theme="light"] .search-palette__backdrop {
+      background: rgba(248, 249, 250, 0.85);
+    }
+    [data-theme="light"] .search-palette__panel {
+      background: #FFFFFF;
+    }
+    [data-theme="light"] .search-palette__input {
+      color: var(--color-gray-100);
+    }
+    [data-theme="light"] .search-palette__hint {
+      color: var(--color-gray-500);
+    }
+    [data-theme="light"] .search-palette__result {
+      color: var(--color-gray-100);
+    }
+    [data-theme="light"] .search-palette__result:hover,
+    [data-theme="light"] .search-palette__result[aria-selected="true"] {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="light"] .featured-cta {
+      background: #f7f7f7;
+      border-color: #e0e0e0;
+      color: #333333;
+    }
+    [data-theme="light"] .featured-cta:hover {
+      background: #ebebeb;
+      border-color: #cccccc;
+    }
+    [data-theme="light"] .featured-cta:active {
+      background: #e0e0e0;
+    }
+
+    [data-theme="light"] .featured-cta-secondary {
+      color: #6C757D;
+      border-color: #DEE2E6;
+    }
+    [data-theme="light"] .featured-cta-secondary:hover {
+      background: #ebebeb;
+      border-color: #cccccc;
+      color: #212529;
+    }
+
     html {
       font-size: 16px;
       -webkit-font-smoothing: antialiased;
@@ -77,6 +242,7 @@
       background: var(--color-gray-900);
       color: #DDDDDD;
       line-height: 1.5;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     /* ===== Layout Container ===== */
@@ -211,22 +377,53 @@
       margin-left: 8px;
     }
 
-    .hero-search-kbd {
+    /* ===== Theme Toggle Button ===== */
+    .theme-toggle {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-width: 30px;
-      height: 22px;
-      padding: 0 6px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      border-radius: 6px;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: var(--color-gray-400);
-      letter-spacing: 0.02em;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      width: 18px;
+      height: 18px;
+      background: transparent;
+      border: none;
+      color: var(--color-gray-500);
+      cursor: pointer;
+      transition: color 0.15s ease;
+      padding: 0;
+      flex-shrink: 0;
     }
+
+    .theme-toggle:hover {
+      color: var(--color-gray-100);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    .theme-toggle-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+    }
+
+    .theme-toggle-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Show sun in light mode, moon in dark mode */
+    [data-theme="light"] .theme-toggle-moon { display: none; }
+    [data-theme="dark"] .theme-toggle-sun { display: none; }
 
     /* ===== Hero Search Results Dropdown ===== */
     .hero-search-wrapper {
@@ -388,9 +585,6 @@
       }
       .hero-search input {
         font-size: 0.875rem;
-      }
-      .hero-search-kbd {
-        display: none;
       }
     }
 
@@ -1633,9 +1827,24 @@
                 <line x1="16.5" y1="16.5" x2="21" y2="21"/>
               </svg>
             </span>
-            <input type="search" placeholder="Search projects, events, team&hellip;" aria-label="Search projects, events, team" autocomplete="off" autocorrect="off" spellcheck="false">
+            <input type="search" placeholder="Type to search, or press Ctrl + K." aria-label="Type to search, or press Ctrl + K" autocomplete="off" autocorrect="off" spellcheck="false">
             <div class="hero-search-actions">
-              <span class="hero-search-kbd" aria-hidden="true">&#8984;K</span>
+              <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle colour theme" title="Toggle colour theme">
+                <svg class="theme-toggle-icon theme-toggle-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"/>
+                  <line x1="12" y1="1" x2="12" y2="3"/>
+                  <line x1="12" y1="21" x2="12" y2="23"/>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                  <line x1="1" y1="12" x2="3" y2="12"/>
+                  <line x1="21" y1="12" x2="23" y2="12"/>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="theme-toggle-icon theme-toggle-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+              </button>
             </div>
           </div>
           <div class="hero-search-results" id="hero-search-results" role="listbox" aria-live="polite" hidden></div>
@@ -1702,7 +1911,7 @@
 
           <div class="hero-featured-content hero-featured-content--reversed">
             <div class="hero-visual whatsnew-visual" aria-label="Watch Out of Sample Episode One on YouTube">
-              <img src="https://i1.ytimg.com/vi/pf-N6RF-Ss4/maxresdefault.jpg" alt="Out of Sample Episode One — Autonomous Quant Research with AI Agents" loading="lazy" width="1280" height="720">
+              <img src="assets/img/out_of_sample.jpg" alt="Out of Sample Episode One — Autonomous Quant Research with AI Agents" loading="lazy" width="1280" height="720">
               <div class="hero-visual-overlay"></div>
             </div>
             <div class="hero-text">
@@ -6200,6 +6409,19 @@
       }
     })();
   </script>
+  </script>
+  <script>
+    (function() {
+      var btn = document.getElementById('theme-toggle-btn');
+      if (!btn) return;
+      btn.addEventListener('click', function() {
+        var html = document.documentElement;
+        var current = html.getAttribute('data-theme');
+        var next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        try { localStorage.setItem('coe-theme', next); } catch(e) {}
+      });
+    })();
   </script>
 </body>
 </html>
