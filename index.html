@@ -2729,9 +2729,19 @@
         'whatsnew': 'Home',
         'events': 'Events',
         'projects': 'Projects',
-        'resources': 'Resources',
+        'resources': 'Learn',
         'team': 'Team',
-        'treasury': 'Treasury'
+        'treasury': 'Funds'
+      };
+
+      // Type display labels (for search badges)
+      var typeLabels = {
+        'home': 'Home',
+        'event': 'Events',
+        'tool': 'Projects',
+        'resource': 'Learn',
+        'team': 'Team',
+        'treasury': 'Funds'
       };
 
       // Type badge colors
@@ -2962,7 +2972,7 @@
           matches = searchIndex.slice();
         } else {
           matches = searchIndex.filter(function(entry) {
-            return (entry.title + ' ' + entry.subtitle + ' ' + entry.snippet).toLowerCase().indexOf(q) !== -1;
+            return (entry.title + ' ' + entry.subtitle + ' ' + entry.snippet + ' ' + (tabNames[entry.tab] || '') + ' ' + (typeLabels[entry.type] || '')).toLowerCase().indexOf(q) !== -1;
           });
         }
 
@@ -3014,7 +3024,7 @@
             visibleCount++;
             var badgeColor = typeColors[item.type] || 'var(--color-gray-500)';
             html += '<button class="search-palette__result" role="option" data-url="' + escapeHtml(item.url || '') + '">'
-              + '<span class="search-palette__result-badge" style="color:' + badgeColor + ';border:1px solid ' + badgeColor + ';background:transparent;">' + escapeHtml(item.type) + '</span>'
+              + '<span class="search-palette__result-badge" style="color:' + badgeColor + ';border:1px solid ' + badgeColor + ';background:transparent;">' + escapeHtml(typeLabels[item.type] || item.type) + '</span>'
               + '<div class="search-palette__result-title">' + escapeHtml(item.title) + '</div>'
               + '<div class="search-palette__result-subtitle">' + escapeHtml(item.subtitle || '') + '</div>'
               + '<div class="search-palette__result-snippet">' + escapeHtml(item.snippet || '') + '</div>'
@@ -3175,7 +3185,7 @@
             matches = [];
           } else {
             matches = searchIndex.filter(function(entry) {
-              return (entry.title + ' ' + entry.subtitle + ' ' + entry.snippet).toLowerCase().indexOf(q) !== -1;
+              return (entry.title + ' ' + entry.subtitle + ' ' + entry.snippet + ' ' + (tabNames[entry.tab] || '') + ' ' + (typeLabels[entry.type] || '')).toLowerCase().indexOf(q) !== -1;
             });
           }
 
@@ -3198,7 +3208,7 @@
           var seen = {};
           for (var i = 0; i < matches.length && combined.length < HERO_CAP; i++) {
             if (!seen[matches[i].id]) {
-              combined.push({ type: 'page', tab: matches[i].tab, title: matches[i].title, subtitle: matches[i].subtitle || '', snippet: matches[i].snippet || '', url: matches[i].url || '', badge: matches[i].type || matches[i].tab });
+              combined.push({ type: 'page', tab: matches[i].tab, origType: matches[i].type, title: matches[i].title, subtitle: matches[i].subtitle || '', snippet: matches[i].snippet || '', url: matches[i].url || '', badge: typeLabels[matches[i].type] || typeLabels[matches[i].tab] || matches[i].tab });
               seen[matches[i].id] = true;
             }
           }
@@ -3210,7 +3220,7 @@
               if (doc.event) subParts.push(doc.event);
               if (doc.eventDate) subParts.push(formatDate(doc.eventDate));
               combined.push({
-                type: 'meetup', tab: 'resources',
+                type: 'meetup', tab: 'resources', origType: 'resource',
                 title: doc.title,
                 subtitle: subParts.join(' \u00b7 '),
                 url: doc.primaryUrl || '',
@@ -3227,7 +3237,7 @@
             var html = '';
             for (var i = 0; i < combined.length; i++) {
               var item = combined[i];
-              var badgeColor = typeColors[item.badge] || typeColors[item.tab] || 'var(--color-gray-500)';
+              var badgeColor = typeColors[item.origType] || typeColors[item.tab] || 'var(--color-gray-500)';
               html += '<div class="hero-result" data-url="' + escapeHtml(item.url) + '">'
                 + '<span class="hero-result-badge" style="color:' + badgeColor + ';border-color:' + badgeColor + ';">' + escapeHtml(item.badge) + '</span>'
                 + '<div class="hero-result-text">'
