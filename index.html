@@ -116,6 +116,73 @@
       margin: 0 auto;
       letter-spacing: 0.01em;
     }
+    /* Override width/centering for optE subtitle so inline content doesn't wrap awkwardly */
+    .hero-header .optE-subtitle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0 6px;
+      max-width: none;
+      margin: 0;
+    }
+    .optE-dot {
+      color: var(--color-gray-500);
+      margin: 0 0.5em;
+    }
+    .optE-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--color-gray-400);
+      text-decoration: none;
+      font: inherit;
+      font-size: inherit;
+      cursor: pointer;
+      padding: 0;
+      border-radius: 0;
+      transition: color 0.15s ease;
+    }
+    .optE-link:hover,
+    .optE-link:focus-visible {
+      color: var(--color-gray-200);
+    }
+    .optE-link:focus-visible {
+      box-shadow: 0 0 0 2px rgba(186, 230, 253, 0.45);
+    }
+    .optE-mag-icon {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .optE-keycap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 16px;
+      padding: 0 4px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 4px;
+      font-size: 0.625rem;
+      line-height: 1;
+      color: var(--color-gray-400, #9ca3af);
+    }
+    /* Mobile: hide the text label, keep icon + keycap, grow touch target */
+    @media (max-width: 480px) {
+      .optE-text {
+        display: none;
+      }
+      .optE-link {
+        padding: 14px 6px;
+      }
+    }
 
     /* ===== Hero Featured Section ===== */
     .hero-featured {
@@ -1268,6 +1335,7 @@
         display: none !important;
       }
     }
+
     .search-palette__no-results {
       padding: 24px 20px;
       text-align: center;
@@ -1290,7 +1358,18 @@
     <div class="hero-header">
       <img class="hero-logo" src="assets/img/coe_logo.png" alt="Numerai Council of Elders" width="160" height="160">
       <h1 id="page-heading">Numerai Council of Elders Hub</h1>
-      <p class="hero-subtitle">A Curated Home for Community Initiatives</p>
+      <p class="hero-subtitle optE-subtitle">
+        A Curated Home for Community Initiatives
+        <span class="optE-dot" aria-hidden="true">&middot;</span>
+        <a href="#" class="optE-link" role="button" aria-label="Search (Ctrl+K or Cmd+K)">
+          <svg class="optE-mag-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="11" cy="11" r="7.5"/>
+            <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+          </svg>
+          <span class="optE-text">Search</span>
+          <span class="optE-keycap" aria-hidden="true">&#x2318;K</span>
+        </a>
+      </p>
 
     </div>
 
@@ -2567,7 +2646,16 @@
         openPalette();
       });
 
-      // On touch devices, ensure FAB is visible and hint hidden
+      // Option E inline link — click opens palette
+      var optE = document.querySelector('.optE-link');
+      if (optE) {
+        optE.addEventListener('click', function(e) {
+          e.preventDefault();
+          openPalette();
+        });
+      }
+
+      // On touch devices, ensure FAB is visible, hint hidden
       if (isTouch) {
         if (hintEl) hintEl.hidden = true;
         if (fab) fab.removeAttribute('hidden');
