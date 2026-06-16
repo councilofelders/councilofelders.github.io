@@ -5860,7 +5860,7 @@
             html += '<button class="search-palette__result search-palette__result-meetup' + disabledClass + '" role="option" data-url="' + escapeHtml(url) + '"';
             if (isDisabled) html += ' disabled';
             html += '>'
-              + '<span class="search-palette__result-badge" style="color:#6096BA;border:1px solid #6096BA;background:transparent;">talk</span>'
+              + '<span class="search-palette__result-badge" style="color:' + (typeColors['resource'] || '#6096BA') + ';border:1px solid ' + (typeColors['resource'] || '#6096BA') + ';background:transparent;">talk</span>'
               + '<div class="search-palette__result-title">' + escapeHtml(item.title) + '</div>'
               + '<div class="search-palette__result-subtitle">' + escapeHtml(item.subtitle) + '</div>'
               + renderAssets(item)

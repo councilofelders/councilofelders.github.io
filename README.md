@@ -38,6 +38,8 @@ The Council of Elders is a community-elected body of Numerai participants who br
 - **Responsive** — 4 breakpoints: desktop (≥1024px), tablet (768–1023px), mobile (<768px), small mobile (≤480px)
 - **ARIA tabs** — keyboard-navigable, screen-reader announcements, skip link
 - **Aurora background** — CSS-animated gradient layers with `prefers-reduced-motion` support
+- **Unified inline search** — all 148 entries (38 pages + 110 meetup talks) embedded in `<script id="search-index">`; no external search engine, no separate JSON fetch
+- **Search UI** — Ctrl+K palette and hero search bar with PDF/Video asset badges; results sorted newest-first
 - **Hosted on** — GitHub Pages (org repo)
 
 ---
@@ -49,28 +51,31 @@ councilofelders.github.io/
 ├── index.html              ← Single-page landing (all CSS + JS inlined)
 ├── README.md               ← This file
 ├── .gitignore
-└── assets/img/
-    ├── coe_logo.png        ← Logo
-    ├── decentralized-ai-days.jpeg  ← Events hero visual
-    ├── funds.jpg           ← Funds tab preview
-    ├── join_the_discussion.jpg     ← Home tab community card
-    ├── numerbay.jpg        ← Project cards ×7
-    ├── numeroo.jpg
-    ├── shiny_numerati.jpg
-    ├── yand.jpg
-    ├── tippening.jpg
-    ├── numerdiff.jpg
-    ├── numerai_agent_bench.jpg
-    └── elders/             ← Elder profile photos ×9
-        ├── aventurine.jpg
-        ├── correlator.png
-        ├── ia_ai.jpg
-        ├── jefferythewind.jpg
-        ├── jrb.jpg
-        ├── numerologist.jpg
-        ├── shatteredx.jpg
-        ├── uuazed.jpg
-        └── wigglemuse.jpg
+├── scripts/
+│   └── build-merged-index.py  ← Regenerate search index from meetups README
+└── assets/
+    └── img/                ← See below
+        ├── coe_logo.png
+        ├── decentralized-ai-days.jpeg
+        ├── funds.jpg
+        ├── join_the_discussion.jpg
+        ├── numerbay.jpg
+        ├── numeroo.jpg
+        ├── shiny_numerati.jpg
+        ├── yand.jpg
+        ├── tippening.jpg
+        ├── numerdiff.jpg
+        ├── numerai_agent_bench.jpg
+        └── elders/         ← Elder profile photos ×9
+            ├── aventurine.jpg
+            ├── correlator.png
+            ├── ia_ai.jpg
+            ├── jefferythewind.jpg
+            ├── jrb.jpg
+            ├── numerologist.jpg
+            ├── shatteredx.jpg
+            ├── uuazed.jpg
+            └── wigglemuse.jpg
 ```
 
 ---
@@ -107,12 +112,27 @@ councilofelders.github.io/
 
 ## Development
 
-The page is a single `index.html` — no build step required. To preview locally, serve with any static file server:
+The page is a single `index.html` — no build step required for static content. To preview locally, serve with any static file server:
 
 ```bash
 python3 -m http.server 8000
 # or
 npx serve .
+```
+
+### Search index
+
+Meetup talk entries are embedded directly in `index.html` inside `<script id="search-index">`. When new meetup content is published, regenerate the index locally:
+
+```bash
+python3 scripts/build-merged-index.py
+```
+
+This fetches the [meetups README](https://github.com/councilofelders/meetups), parses all talk entries, merges them with the existing page entries, and updates `index.html` in place. Then commit and push:
+
+```bash
+git commit -am "Update search index with new meetup content"
+git push
 ```
 
 All edits go directly into `index.html`. Contributions and suggestions welcome via the [Numerai forum](https://forum.numer.ai/).
