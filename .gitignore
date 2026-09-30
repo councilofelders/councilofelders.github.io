@@ -5,6 +5,7 @@ package-lock.json
 
 # Internal docs
 docs/
+doc/
 
 # Ensemble results
 ensemble-results/
@@ -12,3 +13,11 @@ ensemble-results/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Temp backup
+.git-bak/
+
+# Hermes internal
+.hermes.md
+memory_bank.md
+memory_archive.md
