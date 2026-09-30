@@ -43,6 +43,7 @@ EVENT_NAMES: dict[int, str] = {
     13: "Decentralized AI Day San Francisco #13",
     14: "Decentralized AI Day Vienna #14",
     15: "Decentralized AI Day Tokyo #15",
+    16: "Decentralized AI Day Warsaw #16",
 }
 
 MONTH_NAMES = {

@@ -24,7 +24,7 @@ The Council of Elders is a community-elected body of Numerai participants who br
 |-----|---------|
 | 🏠 **Home** | Spotlight (Out of Sample podcast) + Join the Discussion |
 | 🛠️ **Projects** | 7 community-built tools in a 3-column card grid |
-| 📅 **Events** | Decentralized AI Days hero + timeline of 15 global meetups (2022–2026) |
+| 📅 **Events** | Decentralized AI Days hero + timeline of 16 global meetups (2022–2026) |
 | 📚 **Learn** | Meetup Materials, Blog, and Kaggle Notebooks cards |
 | 👥 **Team** | 9 elder profiles with clickable Numerai profile photos |
 | 💰 **Funds** | CoE multi-sig wallet overview |
