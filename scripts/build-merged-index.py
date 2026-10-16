@@ -211,18 +211,23 @@ def parse_meetup_entries(readme_text: str) -> list[dict]:
             link_boundary = re.search(r'\s*[-–—]\s*\[\*\*', after_bold)
             before_links = after_bold[:link_boundary.start()] if link_boundary else after_bold
 
-            # Check if bold text is a talk-number prefix
-            talk_num_match = re.match(r'^(Talk\s*#?\d+(?:\.\d+)*[a-z]?|Bonus Talk)$', raw_title)
+            # Check if the bold text is a talk-number prefix (e.g. "Talk #2",
+            # "Workshop #1"). When it is, the real title is the text between the
+            # prefix and the first link; a trailing "by <speaker>" clause is split
+            # off. When there is no "by" clause (e.g. a panel), the whole middle
+            # text is the title.
+            talk_num_match = re.match(
+                r'^(Talk\s*#?\d+(?:\.\d+)*[a-z]?|Bonus\s+Talk|Workshop\s*#?\d+(?:\.\d+)*[a-z]?)$',
+                raw_title,
+            )
             if talk_num_match:
-                # Real title follows the bold: "**Talk #N** - Actual Title by Speaker"
-                # Find the LAST "by" before the link boundary
                 last_by_pos = before_links.rfind(' by ')
                 if last_by_pos >= 0:
                     title = before_links[:last_by_pos].strip()
-                    # Strip leading dash
-                    title = re.sub(r'^[-–—]\s*', '', title).strip()
                 else:
-                    title = raw_title
+                    title = before_links.strip()
+                # Strip leading dash
+                title = re.sub(r'^[-–—]\s*', '', title).strip()
             else:
                 title = raw_title
 
